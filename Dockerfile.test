@@ -1,0 +1,6 @@
+FROM node:lts-alpine
+WORKDIR /app
+
+# Install all dependencies
+COPY package*.json ./
+RUN npm install

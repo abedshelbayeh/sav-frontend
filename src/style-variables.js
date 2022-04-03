@@ -1,0 +1,10 @@
+export const GREY_BACKGROUND = "#e6e6e6";
+export const LIGHTGREY_BACKGROUND = "rgb(243, 244, 248)";
+export const LIGHTGREY_BACKGROUND_BORDER = "rgb(235, 235, 235)";
+export const SUBTITLE_FONT_SIZE = "10pt";
+export const SUBTITLE_COLOR = "grey";
+export const DANGER_COLOR = "#ff4d4f";
+export const SELECTED_COLOR = "#00bfa6";
+export const LIGHTBLUE_BACKGROUND = "#e1e9f4";
+export const LIGHTBLUE_BACKGROUND_BORDER = "#c3d4e9";
+export const LIGHTGREEN_BACKGROUND = "rgb(232, 251, 240)";

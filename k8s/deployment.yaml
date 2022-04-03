@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sav-frontend
+  labels:
+    app: sav-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sav-frontend
+  template:
+    metadata:
+      labels:
+        app: sav-frontend
+    spec:
+      containers:
+        - name: sav-frontend
+          image: us.gcr.io/p-savvy/sav-frontend
+          ports:
+            - containerPort: 80
