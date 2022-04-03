@@ -1,4 +1,4 @@
-# Builder builds production code
+# Builder builds Production code
 FROM node:lts-alpine AS builder
 WORKDIR /app
 
