@@ -1,5 +1,12 @@
 # Changelog
 
+### [0.2.1](https://github.com/project-savvy/sav-frontend/compare/v0.2.0...v0.2.1) (2022-04-04)
+
+
+### Bug Fixes
+
+* Switched service requests to HTTPS ([f1cbddf](https://github.com/project-savvy/sav-frontend/commit/f1cbddfa620db1f1425634b08089b758bc8c5dd3))
+
 ## [0.2.0](https://github.com/project-savvy/sav-frontend/compare/v0.1.1...v0.2.0) (2022-04-04)
 
 
