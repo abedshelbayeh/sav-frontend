@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.0](https://github.com/project-savvy/sav-frontend/compare/v0.1.1...v0.2.0) (2022-04-04)
+
+
+### Features
+
+* Update icons ([e3ebdd3](https://github.com/project-savvy/sav-frontend/commit/e3ebdd33b8827ab3ffb24de69c65c97b43b30eba))
+
 ### [0.1.1](https://github.com/project-savvy/sav-frontend/compare/v0.1.0...v0.1.1) (2022-04-04)
 
 
