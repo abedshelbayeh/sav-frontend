@@ -4,14 +4,14 @@ import retry from "axios-retry";
 retry(axios, { retries: 3 });
 
 const { NODE_ENV } = process.env;
-let base = `http://${window.location.hostname}`;
+let base = null;
 switch (NODE_ENV) {
   case "production": {
-    base = `${base}/api`;
+    base = `https://${window.location.hostname}/api`;
     break;
   }
   default: {
-    base = `${base}:8080`;
+    base = `http://${window.location.hostname}:8080`;
   }
 }
 
