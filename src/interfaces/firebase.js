@@ -3,14 +3,14 @@ import { getDatabase } from "firebase/database";
 import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDzgRmoyXCDiKazqGA1CrLucgXCi5kFMio",
-  authDomain: "shelbayeh-savvy.firebaseapp.com",
-  projectId: "shelbayeh-savvy",
-  storageBucket: "shelbayeh-savvy.appspot.com",
-  messagingSenderId: "1062155553189",
-  appId: "1:1062155553189:web:6d90c794cd9844dda5804c",
-  measurementId: "G-8KBNS87329",
-  databaseURL: "https://shelbayeh-savvy-default-rtdb.firebaseio.com/",
+  apiKey: "AIzaSyDPojMqMiYFgCVIZzJDg3eXNtQihpnFU-I",
+  authDomain: "p-savvy.firebaseapp.com",
+  projectId: "p-savvy",
+  storageBucket: "p-savvy.appspot.com",
+  messagingSenderId: "28904457598",
+  appId: "1:28904457598:web:34e3b532d38cf348ae1f2f",
+  measurementId: "G-4ZK5VELMLB",
+  databaseURL: "https://p-savvy-default-rtdb.firebaseio.com/",
 };
 
 // Initialize Firebase
