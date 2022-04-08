@@ -11,7 +11,7 @@ switch (NODE_ENV) {
     break;
   }
   default: {
-    base = `http://${window.location.hostname}:8080`;
+    base = `http://${window.location.hostname}:8080/api`;
   }
 }
 

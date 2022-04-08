@@ -4,7 +4,7 @@ import deepEqual from "fast-deep-equal";
 import { Draggable } from "react-beautiful-dnd";
 
 // components
-import Textarea from "../common/textarea.component";
+import Textarea from "../card/textarea.component";
 
 // styles
 import { DeleteTwoTone } from "@ant-design/icons";
@@ -29,6 +29,7 @@ const Card = ({ cardId, index }) => {
     createdBy,
     likes = {},
     cached,
+    selection,
     text,
     columnId,
   } = useSelector(selectMappedCardsByCardId(cardId), deepEqual);
@@ -55,8 +56,13 @@ const Card = ({ cardId, index }) => {
             autoSave={true}
             localValue={cached}
             cloudValue={text}
-            onChange={(value) => dispatch(updateCard(cardId, value))}
-            onSave={(value) => dispatch(saveCard(cardId, value))}
+            selection={selection}
+            onChange={({ value, selection }) => {
+              dispatch(updateCard(cardId, value, selection));
+            }}
+            onSave={() => {
+              dispatch(saveCard(cardId));
+            }}
             disabled={!isCardOwnedByUser}
           />
           <Styled.Extra>
