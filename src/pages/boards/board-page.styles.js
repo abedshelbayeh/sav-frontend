@@ -43,6 +43,7 @@ export const Title = styled.div`
     border: none;
     box-shadow: none;
     height: unset;
+    background-color: inherit;
   }
 `;
 

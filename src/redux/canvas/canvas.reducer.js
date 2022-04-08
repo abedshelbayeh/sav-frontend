@@ -45,12 +45,13 @@ const canvasReducer = (state = INITIAL_STATE, action) => {
         ...state,
         mappedCards: Object.keys(mappedCards).reduce((a, mappedCardId) => {
           const mappedCard = mappedCards[mappedCardId];
-          const { cached } = cachedMappedCards[mappedCardId] || {};
+          const { cached, selection } = cachedMappedCards[mappedCardId] || {};
           return {
             ...a,
             [mappedCardId]: {
               ...mappedCard,
               cached,
+              selection,
             },
           };
         }, {}),
@@ -69,7 +70,7 @@ const canvasReducer = (state = INITIAL_STATE, action) => {
     }
 
     case CanvasActionTypes.UPDATE_CACHED_CARD_TEXT: {
-      const { cardId, text } = action.payload;
+      const { cardId, text, selection } = action.payload;
       const { mappedCards } = state;
 
       return {
@@ -79,6 +80,7 @@ const canvasReducer = (state = INITIAL_STATE, action) => {
           [cardId]: {
             ...mappedCards[cardId],
             cached: text,
+            selection,
           },
         },
       };

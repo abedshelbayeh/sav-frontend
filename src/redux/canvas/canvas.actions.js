@@ -52,7 +52,12 @@ export const addCard = (columnId) => {
     const card = {
       id: uuid(),
       columnId,
-      text: "",
+      text: [
+        {
+          type: "paragraph",
+          children: [{ text: "" }],
+        },
+      ],
       likes: {},
       createdBy: uid,
     };
@@ -145,30 +150,24 @@ export const moveCard = (source, destination, cardId) => {
   };
 };
 
-export const saveCard = (cardId, text) => {
-  return async (dispatch, getState) => {
-    const { canvas: { boardId } = {} } = getState();
-
-    dispatch({
-      type: CanvasActionTypes.UPDATE_CACHED_CARD_TEXT,
-      payload: {
-        cardId,
-        text: null,
-      },
-    });
+export const saveCard = (cardId) => {
+  return async (_, getState) => {
+    const { canvas: { boardId, mappedCards = {} } = {} } = getState();
+    const { [cardId]: { cached } = {} } = mappedCards;
 
     update(ref(database), {
-      [`/boards/${boardId}/mappedCards/${cardId}/text`]: text,
+      [`/boards/${boardId}/mappedCards/${cardId}/text`]: cached,
     });
   };
 };
 
-export const updateCard = (cardId, text) => {
+export const updateCard = (cardId, text, selection) => {
   return {
     type: CanvasActionTypes.UPDATE_CACHED_CARD_TEXT,
     payload: {
       cardId,
       text,
+      selection,
     },
   };
 };

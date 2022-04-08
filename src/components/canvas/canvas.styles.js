@@ -1,10 +1,8 @@
-import { LikeFilled, LikeOutlined } from "@ant-design/icons";
-import { Tag } from "antd";
 import styled from "styled-components";
+import { Tag } from "antd";
+import { LikeFilled, LikeOutlined } from "@ant-design/icons";
 import {
   LIGHTBLUE_BACKGROUND,
-  LIGHTBLUE_BACKGROUND_BORDER,
-  LIGHTGREY_BACKGROUND_BORDER,
   LIGHTGREY_BACKGROUND,
   LIGHTGREEN_BACKGROUND,
 } from "../../style-variables";
@@ -33,9 +31,10 @@ export const Column = styled.div`
   flex-basis: 0;
   margin: 5px;
   background-color: ${({ isDragging }) =>
-    isDragging ? LIGHTGREEN_BACKGROUND : LIGHTGREY_BACKGROUND};
+    isDragging ? LIGHTGREEN_BACKGROUND : "white"};
   transition: background-color ease 0.2s;
   border-radius: 8px;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 2px 0px;
 `;
 
 export const Header = styled.div`
@@ -84,11 +83,7 @@ export const Card = styled.div`
   flex-direction: column;
   margin: 5px;
   background-color: ${({ isCardOwnedByUser }) =>
-    isCardOwnedByUser ? LIGHTBLUE_BACKGROUND : "white"};
-  border: ${({ isCardOwnedByUser }) =>
-    isCardOwnedByUser
-      ? `1px solid ${LIGHTBLUE_BACKGROUND_BORDER}`
-      : `1px solid ${LIGHTGREY_BACKGROUND_BORDER}`};
+    isCardOwnedByUser ? LIGHTBLUE_BACKGROUND : LIGHTGREY_BACKGROUND};
   border-radius: 5px;
   padding: 10px 10px 5px 10px;
 `;
@@ -97,7 +92,7 @@ export const Extra = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin: 10px 0 0 0;
+  margin: 15px 0 0 0;
 `;
 
 export const Like = styled(Tag)`

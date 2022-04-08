@@ -24,7 +24,12 @@ import {
 } from "@ant-design/icons";
 import * as Styled from "./board-page.styles";
 
+// actions
+import { fetchPeopleStart } from "../../redux/people/people.actions";
+
 const BoardPage = () => {
+  document.body.style = "background-color: rgb(240, 242, 245);";
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -44,8 +49,12 @@ const BoardPage = () => {
       setBoard(board);
       setLoading(false);
     };
+    dispatch(fetchPeopleStart({ current: 1, pageSize: 0 }));
     getBoard();
-  }, [boardId]);
+    return () => {
+      document.body.style = "background-color: unset;";
+    };
+  }, [boardId, dispatch]);
 
   const onTitleChange = async (input) => {
     try {
