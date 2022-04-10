@@ -12,7 +12,9 @@ const Initials = ({ children, ...rest }) => {
   return (
     <Avatar
       style={
-        typeof children === "string" ? { backgroundColor: stc(children) } : {}
+        typeof children === "string"
+          ? { backgroundColor: stc(children), color: "white" }
+          : {}
       }
       {...rest}
     >

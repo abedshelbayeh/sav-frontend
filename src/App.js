@@ -14,8 +14,11 @@ import BoardPage from "./pages/boards/board-page.component";
 import { authenticationStart, setUser } from "./redux/user/user.actions";
 
 // styles
-import { Result } from "antd";
+import { ConfigProvider, Result } from "antd";
 import styled from "styled-components";
+import { ThemeProvider } from "styled-components";
+import * as themes from "./themes";
+import GlobalStyle from "./global-styles";
 
 const Message = styled.div`
   position: absolute;
@@ -36,7 +39,11 @@ const Construction = () => (
 function App() {
   const dispatch = useDispatch();
 
-  const { loading, user } = useSelector(({ user }) => user);
+  const { loading, user, theme } = useSelector(({ user }) => user);
+
+  ConfigProvider.config({
+    theme: themes[theme],
+  });
 
   useEffect(() => {
     dispatch(authenticationStart());
@@ -58,16 +65,21 @@ function App() {
   }
 
   return (
-    <Layout>
-      <Routes>
-        <Route path="/" element={<BoardsPage />} />
-        <Route exact path="/your-work" element={<Construction />} />
-        <Route exact path="/boards" element={<BoardsPage />} />
-        <Route exact path="/boards/:boardId" element={<BoardPage />} />
-        <Route exect path="/dashboards" element={<Construction />} />
-        <Route exact path="/people" element={<PeoplePage />} />
-      </Routes>
-    </Layout>
+    <ThemeProvider theme={themes[theme]}>
+      <GlobalStyle />
+      <ConfigProvider>
+        <Layout>
+          <Routes>
+            <Route path="/" element={<BoardsPage />} />
+            <Route exact path="/your-work" element={<Construction />} />
+            <Route exact path="/boards" element={<BoardsPage />} />
+            <Route exact path="/boards/:boardId" element={<BoardPage />} />
+            <Route exect path="/dashboards" element={<Construction />} />
+            <Route exact path="/people" element={<PeoplePage />} />
+          </Routes>
+        </Layout>
+      </ConfigProvider>
+    </ThemeProvider>
   );
 }
 

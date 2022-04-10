@@ -5,8 +5,8 @@ export const Header = styled.div`
   position: sticky;
   top: 0;
   z-index: 3;
-  padding: 25px 0 20px 0;
-  background-color: rgba(255, 255, 255, 0.9);
+  padding: 0 0 20px 0;
+  background-color: ${({ theme }) => theme.BACKGROUND_200_TRANSPARENT};
 `;
 
 export const Search = styled(Input.Search)`
@@ -26,6 +26,7 @@ export const Loading = styled.div`
 
 export const Title = styled(Typography.Title)`
   margin: 15px 0 0 0;
+  color: ${({ theme }) => theme.COLOR_PRIMARY_TEXT} !important;
 `;
 
 export const Templates = styled.div`

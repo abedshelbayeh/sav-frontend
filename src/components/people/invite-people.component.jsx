@@ -1,10 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
 
 // styles
-import { Form, Input, Modal } from "antd";
-import { PlusOutlined, DeleteTwoTone } from "@ant-design/icons";
+import { Button, Form, Input, Modal } from "antd";
+import { PlusOutlined, DeleteOutlined } from "@ant-design/icons";
 import * as Styled from "./people.styles";
-import { DANGER_COLOR } from "../../style-variables";
 
 // actions
 import { toggleInvitePeople } from "../../redux/people/people.actions";
@@ -62,8 +61,11 @@ const InvitePeople = () => {
                       placeholder="Email address"
                       suffix={
                         fields.length > 1 && (
-                          <DeleteTwoTone
-                            twoToneColor={DANGER_COLOR}
+                          <Button
+                            type="link"
+                            danger
+                            icon={<DeleteOutlined />}
+                            style={{ width: "100%", height: "100%" }}
                             onClick={() => remove(field.name)}
                           />
                         )

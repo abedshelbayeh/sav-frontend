@@ -7,8 +7,6 @@ import { Draggable } from "react-beautiful-dnd";
 import Textarea from "../card/textarea.component";
 
 // styles
-import { DeleteTwoTone } from "@ant-design/icons";
-import { DANGER_COLOR } from "../../style-variables";
 import * as Styled from "./canvas.styles";
 
 // actions
@@ -67,8 +65,7 @@ const Card = ({ cardId, index }) => {
           />
           <Styled.Extra>
             {isCardOwnedByUser && (
-              <DeleteTwoTone
-                twoToneColor={DANGER_COLOR}
+              <Styled.Remove
                 onClick={() => dispatch(removeCard(columnId, cardId))}
               />
             )}

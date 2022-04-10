@@ -8,8 +8,7 @@ import confirm from "./utils/confirm-delete";
 // styles
 import * as Styled from "./boards.styles";
 import { Table, Badge, Button } from "antd";
-import { DeleteTwoTone, EditTwoTone } from "@ant-design/icons";
-import { DANGER_COLOR } from "../../style-variables";
+import { DeleteOutlined, EditFilled } from "@ant-design/icons";
 
 // actions
 import {
@@ -63,16 +62,16 @@ const Boards = () => {
         <Styled.Actions>
           <Button
             onClick={() => dispatch(toggleEditBoard(id))}
-            type="text"
+            type="link"
             size="small"
-            icon={<EditTwoTone />}
+            icon={<EditFilled />}
           />
           <Button
             onClick={() => confirm(name, async () => dispatch(deleteBoard(id)))}
             type="text"
             size="small"
             danger
-            icon={<DeleteTwoTone twoToneColor={DANGER_COLOR} />}
+            icon={<DeleteOutlined />}
           />
         </Styled.Actions>
       ),

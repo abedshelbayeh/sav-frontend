@@ -1,12 +1,5 @@
 import { Typography } from "antd";
 import styled from "styled-components";
-import {
-  GREY_BACKGROUND,
-  LIGHTGREY_BACKGROUND,
-  LIGHTGREY_BACKGROUND_BORDER,
-  SUBTITLE_COLOR,
-  SUBTITLE_FONT_SIZE,
-} from "../../style-variables";
 
 export const Loading = styled.div`
   position: absolute;
@@ -19,11 +12,12 @@ export const Breadcrumbs = styled.div`
   display: flex;
   align-items: center;
   gap: 8px;
-  margin: 25px 0 0 0;
+  color: ${({ theme }) => theme.COLOR_PRIMARY_TEXT};
   cursor: pointer;
 `;
 
 export const Title = styled(Typography.Title)`
+  color: ${({ theme }) => theme.COLOR_PRIMARY_TEXT} !important;
   margin: 0 !important;
 `;
 
@@ -44,12 +38,6 @@ export const Header = styled.div`
   & h2 {
     margin: 0 10px 0 0;
   }
-
-  .ant-badge-count {
-    background-color: ${GREY_BACKGROUND};
-    color: black;
-    font-weight: 500;
-  }
 `;
 
 export const Participants = styled.div`
@@ -62,9 +50,8 @@ export const Participant = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 5px 20px 5px 10px;
-  background-color: ${LIGHTGREY_BACKGROUND};
-  border: 1px solid ${LIGHTGREY_BACKGROUND_BORDER};
+  padding: 5px 10px;
+  background-color: ${({ theme }) => theme.BACKGROUND_50};
   border-radius: 5px;
 `;
 
@@ -72,10 +59,11 @@ export const User = styled.div`
   display: flex;
   align-items: center;
   gap: 15px;
+  color: ${({ theme }) => theme.COLOR_PRIMARY_TEXT};
 `;
 
 export const Subtitle = styled.div`
-  font-size: ${SUBTITLE_FONT_SIZE};
-  color: ${SUBTITLE_COLOR};
+  font-size: 10pt;
+  color: ${({ theme }) => theme.COLOR_SECONDARY_TEXT};
   margin-top: -5px;
 `;
