@@ -8,7 +8,7 @@ import Card from "./card.component";
 
 // styles
 import * as Styled from "./canvas.styles";
-import { HolderOutlined, PlusCircleTwoTone } from "@ant-design/icons";
+import { HolderOutlined, PlusCircleFilled } from "@ant-design/icons";
 
 // actions
 import { addCard } from "../../redux/canvas/canvas.actions";
@@ -32,12 +32,12 @@ const Column = ({ title, index }) => {
           ref={provided.innerRef}
           isDragging={isDragging}
         >
-          <Styled.Header {...provided.dragHandleProps}>
+          <Styled.Header {...provided.dragHandleProps} isDragging={isDragging}>
             <Styled.Title>
               <HolderOutlined />
               {title.toUpperCase()}
             </Styled.Title>
-            <PlusCircleTwoTone onClick={() => dispatch(addCard(title))} />
+            <PlusCircleFilled onClick={() => dispatch(addCard(title))} />
           </Styled.Header>
           <Droppable droppableId={title} type="CARD">
             {(provided, { isDraggingOver }) => (
@@ -52,7 +52,7 @@ const Column = ({ title, index }) => {
                   ))}
                 {cardIds.length <= 0 && (
                   <Styled.Empty>
-                    Click the <PlusCircleTwoTone /> icon on the top right corner
+                    Click the <PlusCircleFilled /> icon on the top right corner
                     to add a new card.
                   </Styled.Empty>
                 )}

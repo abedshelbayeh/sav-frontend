@@ -52,3 +52,7 @@ export const toggleInvitePeople = () => {
     type: PeopleActionTypes.TOGGLE_INVITE_PEOPLE,
   };
 };
+
+export const resetPeople = () => {
+  return { type: PeopleActionTypes.RESET_PEOPLE };
+};

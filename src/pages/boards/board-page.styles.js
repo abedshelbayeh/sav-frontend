@@ -34,6 +34,7 @@ export const Back = styled.div`
 
 export const Title = styled.div`
   width: 80%;
+  color: ${({ theme }) => theme.COLOR_PRIMARY_TEXT};
 
   & .ant-typography-edit-content {
     margin: -4px 0 11.5px 1px;
@@ -43,7 +44,8 @@ export const Title = styled.div`
     border: none;
     box-shadow: none;
     height: unset;
-    background-color: inherit;
+    background: transparent !important;
+    color: ${({ theme }) => theme.COLOR_PRIMARY_TEXT};
   }
 `;
 

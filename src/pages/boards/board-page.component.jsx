@@ -19,17 +19,18 @@ import { Typography, Button, Result, Spin } from "antd";
 import {
   DeleteOutlined,
   EllipsisOutlined,
-  LeftCircleTwoTone,
-  EditTwoTone,
+  EditOutlined,
+  ArrowLeftOutlined,
 } from "@ant-design/icons";
 import * as Styled from "./board-page.styles";
 
 // actions
-import { fetchPeopleStart } from "../../redux/people/people.actions";
+import {
+  fetchPeopleStart,
+  resetPeople,
+} from "../../redux/people/people.actions";
 
 const BoardPage = () => {
-  document.body.style = "background-color: rgb(240, 242, 245);";
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -52,7 +53,7 @@ const BoardPage = () => {
     dispatch(fetchPeopleStart({ current: 1, pageSize: 0 }));
     getBoard();
     return () => {
-      document.body.style = "background-color: unset;";
+      dispatch(resetPeople());
     };
   }, [boardId, dispatch]);
 
@@ -104,14 +105,14 @@ const BoardPage = () => {
       <Styled.Header>
         <Styled.Title>
           <Styled.Back onClick={() => navigate("/boards")}>
-            <LeftCircleTwoTone />
+            <ArrowLeftOutlined />
             <span>Boards</span>
           </Styled.Back>
           <Typography.Title
             level={2}
             editable={{
               onChange: onTitleChange,
-              icon: <EditTwoTone />,
+              icon: <EditOutlined />,
               enterIcon: null,
               maxLength: 50,
               autoFocus: true,
@@ -124,7 +125,9 @@ const BoardPage = () => {
           <Button
             shape="circle"
             icon={
-              <EditTwoTone onClick={() => dispatch(toggleEditBoard(boardId))} />
+              <EditOutlined
+                onClick={() => dispatch(toggleEditBoard(boardId))}
+              />
             }
           />
           <Button

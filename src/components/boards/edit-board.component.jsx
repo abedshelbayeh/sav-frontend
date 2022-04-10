@@ -67,43 +67,41 @@ const Component = () => {
           />
         )}
       </Styled.Content>
-      <Styled.Sidebar>
-        <Styled.Stepper>
-          <Steps current={step} direction="vertical" progressDot>
-            <Steps.Step
-              title="Template"
-              description="Choose a template for this board"
-            />
-            <Steps.Step
-              title="Participants"
-              description="Who's going to participate?"
-            />
-          </Steps>
-        </Styled.Stepper>
-        {!loading && step === 1 && (
-          <Styled.Actions>
-            <Button
-              type="primary"
-              size="large"
-              loading={saving}
-              onClick={() =>
-                dispatch(
-                  editBoard(
-                    boardId,
-                    {
-                      templateId: selectedTemplateId,
-                      participants: Object.keys(selectedParticipants),
-                    },
-                    (boardId) => navigate(`/boards/${boardId}`)
-                  )
+      <Styled.Stepper>
+        <Steps current={step} direction="vertical" progressDot>
+          <Steps.Step
+            title="Template"
+            description="Choose a template for this board"
+          />
+          <Steps.Step
+            title="Participants"
+            description="Who's going to participate?"
+          />
+        </Steps>
+      </Styled.Stepper>
+      {!loading && step === 1 && (
+        <Styled.Actions>
+          <Button
+            type="primary"
+            size="large"
+            loading={saving}
+            onClick={() =>
+              dispatch(
+                editBoard(
+                  boardId,
+                  {
+                    templateId: selectedTemplateId,
+                    participants: Object.keys(selectedParticipants),
+                  },
+                  (boardId) => navigate(`/boards/${boardId}`)
                 )
-              }
-            >
-              Save
-            </Button>
-          </Styled.Actions>
-        )}
-      </Styled.Sidebar>
+              )
+            }
+          >
+            Save
+          </Button>
+        </Styled.Actions>
+      )}
     </Styled.Container>
   );
 };
@@ -118,7 +116,7 @@ const EditBoard = () => {
       visible={visible}
       width="95%"
       style={{ padding: 0 }}
-      bodyStyle={{ height: "92vh", overflow: "scroll", padding: "0px 25px" }}
+      bodyStyle={{ height: "92vh", overflow: "scroll" }}
       onCancel={() => dispatch(toggleEditBoard(boardId))}
       footer={null}
       centered

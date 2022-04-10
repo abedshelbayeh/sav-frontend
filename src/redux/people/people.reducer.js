@@ -67,6 +67,10 @@ const peopleReducer = (state = INITIAL_STATE, action) => {
       };
     }
 
+    case PeopleActionTypes.RESET_PEOPLE: {
+      return INITIAL_STATE;
+    }
+
     default: {
       return state;
     }
