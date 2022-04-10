@@ -11,6 +11,6 @@ export const Overlay = styled.div`
 
   & .anticon {
     font-size: 10pt;
-    color: #096dd9;
+    color: ${({ theme }) => theme.CANVAS_SYNC_COLOR};
   }
 `;

@@ -2,21 +2,13 @@ import { CheckCircleFilled } from "@ant-design/icons";
 import { Typography } from "antd";
 import styled from "styled-components";
 
-import {
-  LIGHTGREY_BACKGROUND,
-  LIGHTGREY_BACKGROUND_BORDER,
-  SELECTED_COLOR,
-} from "../../style-variables";
-
 export const Card = styled.div`
   position: relative;
   height: 240px;
   width: 240px;
-  background-color: ${LIGHTGREY_BACKGROUND};
-  border: ${({ selected }) =>
-    selected
-      ? `1px solid ${SELECTED_COLOR}`
-      : `1px solid ${LIGHTGREY_BACKGROUND_BORDER}`};
+  background-color: ${({ theme }) => theme.BACKGROUND_50};
+  border: ${({ selected, theme }) =>
+    selected ? `1px solid ${theme.COLOR_POSITIVE}` : `none`};
   border-radius: 15px;
 
   @media screen and (max-width: 850px) {
@@ -54,7 +46,8 @@ export const Overlay = styled.div`
   left: 0;
   padding: 15px;
   opacity: 0;
-  background-color: rgb(243, 244, 248);
+  background-color: ${({ theme }) => theme.BACKGROUND_50};
+  color: ${({ theme }) => theme.COLOR_PRIMARY_TEXT};
   border-radius: 15px;
   transition: opacity 0.45s ease;
   display: flex;
@@ -85,9 +78,10 @@ export const Actions = styled.div`
 
 export const SelectedIcon = styled(CheckCircleFilled)`
   font-size: 25px;
-  color: ${SELECTED_COLOR};
+  color: ${({ theme }) => theme.COLOR_POSITIVE};
 `;
 
 export const Title = styled(Typography.Title)`
   margin: 5px;
+  color: ${({ theme }) => theme.COLOR_PRIMARY_TEXT} !important;
 `;

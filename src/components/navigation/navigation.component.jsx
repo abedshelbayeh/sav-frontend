@@ -1,24 +1,27 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { signOut } from "../../interfaces/firebase";
 
 // components
 import EditBoard from "../boards/edit-board.component";
+import { ReactComponent as Sun } from "../../assets/sun.svg";
+import { ReactComponent as Moon } from "../../assets/moon.svg";
 
 // styles
 import {
   SettingFilled,
-  BellFilled,
   UserOutlined,
   PlusOutlined,
-  DownCircleTwoTone,
+  LogoutOutlined,
+  CaretDownOutlined,
 } from "@ant-design/icons";
 import { Avatar, Button, Dropdown, Menu } from "antd";
 import * as Styled from "./navigation.styles";
 
 // actions
 import { toggleEditBoard } from "../../redux/boards/boards.actions";
+import { setTheme } from "../../redux/user/user.actions";
 
 const primaryActions = [
   {
@@ -39,7 +42,7 @@ const primaryActions = [
   },
 ];
 
-const Navigation = () => {
+const Navigation = ({ setLayloutClass }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -47,6 +50,8 @@ const Navigation = () => {
 
   const [{ id: defaultAction } = {}] = primaryActions;
   const [selectedAction, selectAction] = useState(defaultAction);
+
+  const theme = useSelector(({ user: { theme } }) => theme);
 
   useEffect(() => {
     const [pathAction] = pathname.match("[^/]+") || [];
@@ -91,7 +96,7 @@ const Navigation = () => {
           <Dropdown overlay={<Menu>{menu}</Menu>}>
             <Styled.Item>
               More
-              <DownCircleTwoTone />
+              <CaretDownOutlined />
             </Styled.Item>
           </Dropdown>
         )}
@@ -106,15 +111,39 @@ const Navigation = () => {
         </Styled.Item>
       </Styled.Section>
       <Styled.Section>
-        <Styled.SecondaryItem>
-          <BellFilled />
+        <Styled.SecondaryItem toggle>
+          <Styled.Toggle
+            defaultChecked={theme === "dark"}
+            checkedChildren={<Moon />}
+            unCheckedChildren={<Sun />}
+            onChange={() => {
+              setLayloutClass("disable-transition");
+              dispatch(setTheme(theme === "light" ? "dark" : "light"));
+              setTimeout(() => {
+                setLayloutClass();
+              }, 100);
+            }}
+          />
         </Styled.SecondaryItem>
         <Styled.SecondaryItem>
           <SettingFilled />
         </Styled.SecondaryItem>
-        <Styled.SecondaryItem onClick={() => signOut()}>
-          <Avatar icon={<UserOutlined />} />
-        </Styled.SecondaryItem>
+        <Dropdown
+          overlay={
+            <Menu>
+              <Menu.Item
+                onClick={() => handleNavigate(() => signOut())}
+                icon={<LogoutOutlined />}
+              >
+                Signout
+              </Menu.Item>
+            </Menu>
+          }
+        >
+          <Styled.SecondaryItem>
+            <Avatar icon={<UserOutlined />} />
+          </Styled.SecondaryItem>
+        </Dropdown>
       </Styled.Section>
     </Styled.Container>
   );

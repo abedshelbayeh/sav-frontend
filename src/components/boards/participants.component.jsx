@@ -5,9 +5,8 @@ import { useSelector } from "react-redux";
 import Avatar from "../common/avatar.component";
 
 // styles
-import { Mentions, Empty, Badge, Spin } from "antd";
-import { ArrowLeftOutlined, DeleteTwoTone } from "@ant-design/icons";
-import { DANGER_COLOR } from "../../style-variables";
+import { Mentions, Empty, Badge, Spin, Button } from "antd";
+import { ArrowLeftOutlined, DeleteOutlined } from "@ant-design/icons";
 import * as Styled from "./participants.styles";
 
 const Participants = ({
@@ -80,8 +79,10 @@ const Participants = ({
                       <Styled.Subtitle>{email}</Styled.Subtitle>
                     </div>
                   </Styled.User>
-                  <DeleteTwoTone
-                    twoToneColor={DANGER_COLOR}
+                  <Button
+                    type="text"
+                    danger
+                    icon={<DeleteOutlined />}
                     onClick={() => {
                       const { [participant]: remove, ...rest } =
                         selectedParticipants;

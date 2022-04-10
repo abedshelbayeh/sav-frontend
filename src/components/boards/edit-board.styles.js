@@ -10,24 +10,17 @@ export const Container = styled.div`
   }
 `;
 
-export const Sidebar = styled.div`
-  display: flex;
-  flex-direction: column;
-
-  @media screen and (min-width: 850px) {
-    position: sticky;
-    height: 92vh;
-    top: 0;
-    justify-content: space-between;
-  }
-`;
-
 export const Stepper = styled.div`
   display: none;
 
   @media screen and (min-width: 850px) {
-    margin: 50px 50px 0 0;
+    margin: 50px 90px 0 0;
+    background-color: inherit;
+    z-index: 3;
     display: unset;
+    position: absolute;
+    top: 0;
+    right: 0;
   }
 `;
 
@@ -40,6 +33,9 @@ export const Content = styled.div`
 `;
 
 export const Actions = styled.div`
+  position: absolute;
+  bottom: 0px;
+  right: 25px;
   align-self: flex-end;
   padding: 0 0 25px 0;
 `;

@@ -1,12 +1,5 @@
 import styled from "styled-components";
-
 import { Button } from "antd";
-
-import {
-  GREY_BACKGROUND,
-  SUBTITLE_FONT_SIZE,
-  SUBTITLE_COLOR,
-} from "../../style-variables";
 
 export const Header = styled.div`
   display: flex;
@@ -15,12 +8,6 @@ export const Header = styled.div`
 
   & h2 {
     margin: 0 10px 0 0;
-  }
-
-  .ant-badge-count {
-    background-color: ${GREY_BACKGROUND};
-    color: black;
-    font-weight: 500;
   }
 `;
 
@@ -31,11 +18,18 @@ export const User = styled.div`
 `;
 
 export const Subtitle = styled.div`
-  font-size: ${SUBTITLE_FONT_SIZE};
-  color: ${SUBTITLE_COLOR};
+  font-size: 10pt;
+  color: ${({ theme }) => theme.COLOR_SECONDARY_TEXT};
   margin-top: -5px;
 `;
 
 export const InviteAnotherButton = styled(Button)`
   width: 100%;
+  background-color: ${({ theme }) => theme.BACKGROUND_200} !important;
+  color: ${({ theme }) => theme.COLOR_PRIMARY_TEXT};
+  border: ${({ theme }) => `1px dashed ${theme.COLOR_SECONDARY_TEXT}`};
+
+  :hover {
+    background-color: ${({ theme }) => theme.BACKGROUND_100} !important;
+  }
 `;

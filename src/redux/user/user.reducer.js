@@ -3,6 +3,7 @@ import UserActionTypes from "./user.types";
 const INITIAL_STATE = {
   loading: true,
   user: null,
+  theme: "light",
 };
 
 const userReducer = (state = INITIAL_STATE, action) => {
@@ -15,10 +16,19 @@ const userReducer = (state = INITIAL_STATE, action) => {
     }
 
     case UserActionTypes.SET_USER: {
+      const { user, theme } = action.payload;
       return {
         ...state,
         loading: false,
-        user: action.payload,
+        user,
+        theme,
+      };
+    }
+
+    case UserActionTypes.SET_THEME: {
+      return {
+        ...state,
+        theme: action.payload,
       };
     }
 
