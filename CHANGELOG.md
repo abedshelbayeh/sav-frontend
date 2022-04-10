@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.3.0](https://github.com/project-savvy/sav-frontend/compare/v0.2.1...v0.3.0) (2022-04-10)
+
+
+### Features
+
+* [#11](https://github.com/project-savvy/sav-frontend/issues/11) Add support for a dark mode ([bc72b9c](https://github.com/project-savvy/sav-frontend/commit/bc72b9c0d612f58a8262e4a346cf19cb5fd3f187))
+* [#8](https://github.com/project-savvy/sav-frontend/issues/8) Introduce mentions to cards ([2f4d61e](https://github.com/project-savvy/sav-frontend/commit/2f4d61ed654bf4373cbd764766287ff2c5fe6371))
+
 ### [0.2.1](https://github.com/project-savvy/sav-frontend/compare/v0.2.0...v0.2.1) (2022-04-04)
 
 
