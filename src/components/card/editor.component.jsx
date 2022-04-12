@@ -143,6 +143,7 @@ const Component = ({ value, selection, onChange, disabled }) => {
           placeholder="What's on your mind?"
           renderElement={renderElement}
           onKeyDown={onKeyDown}
+          className="card-text"
         />
       </Styled.Textarea>
       {portalTarget && filtered.length > 0 && (

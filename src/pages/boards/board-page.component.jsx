@@ -5,23 +5,11 @@ import service from "../../interfaces/service";
 
 // components
 import Canvas from "../../components/canvas/canvas.component";
-import confirm from "../../components/boards/utils/confirm-delete";
 import notify from "../../utils/notification.util";
-
-// actions
-import {
-  deleteBoard,
-  toggleEditBoard,
-} from "../../redux/boards/boards.actions";
 
 // styles
 import { Typography, Button, Result, Spin } from "antd";
-import {
-  DeleteOutlined,
-  EllipsisOutlined,
-  EditOutlined,
-  ArrowLeftOutlined,
-} from "@ant-design/icons";
+import { EditOutlined, ArrowLeftOutlined } from "@ant-design/icons";
 import * as Styled from "./board-page.styles";
 
 // actions
@@ -121,32 +109,8 @@ const BoardPage = () => {
             {name}
           </Typography.Title>
         </Styled.Title>
-        <Styled.Actions>
-          <Button
-            shape="circle"
-            icon={
-              <EditOutlined
-                onClick={() => dispatch(toggleEditBoard(boardId))}
-              />
-            }
-          />
-          <Button
-            shape="circle"
-            type="danger"
-            icon={
-              <DeleteOutlined
-                onClick={() =>
-                  confirm(name, async () =>
-                    dispatch(deleteBoard(boardId, () => navigate("/boards")))
-                  )
-                }
-              />
-            }
-          />
-          <Button shape="circle" icon={<EllipsisOutlined />} />
-        </Styled.Actions>
       </Styled.Header>
-      <Canvas boardId={id} columns={columns} />
+      <Canvas boardId={id} boardName={name} columns={columns} />
     </Styled.Container>
   );
 };

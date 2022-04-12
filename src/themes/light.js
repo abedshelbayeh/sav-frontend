@@ -8,6 +8,7 @@ const theme = {
   BACKGROUND_200_TRANSPARENT: "rgb(255,255,255,0.8)",
   BACKGROUND_100: "rgb(255,255,255)",
   BACKGROUND_50: "rgb(243,244,245)",
+  BACKGROUND_50_TRANSPARENT: "rgba(243,244,245,0.8)",
   COLOR_TRANSPARENT_BORDER: "rgba(0,0,0,0.06)",
   COLOR_SOLID_BORDER: "rgb(217,217,217)",
   COLOR_SOLID_BORDER_BRIGHT: "rgb(240,240,240)",
@@ -29,6 +30,9 @@ const theme = {
 
   NOTIFICATION_BACKGROUND: "#ffffff",
   NOTIFICATION_BORDER: "#ffffff",
+
+  ALERT_INFO_BACKGROUND: "rgb(80,153,233)",
+  ALERT_INFO_COLOR: "black",
 
   // antd
   primaryColor: "#1890ff",

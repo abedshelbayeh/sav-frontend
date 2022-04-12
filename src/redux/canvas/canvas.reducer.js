@@ -6,6 +6,12 @@ const INITIAL_STATE = {
   orderedColumnIds: [],
   mappedCards: {},
   mappedColumnCardIds: {},
+  settings: {
+    cardsVisible: false,
+    votingEnabled: true,
+    votesVisible: true,
+    paused: false,
+  },
   subscription: null,
   error: null,
 };
@@ -33,12 +39,14 @@ const canvasReducer = (state = INITIAL_STATE, action) => {
       const {
         mappedCards: cachedMappedCards = {},
         orderedColumnIds: cachedOrderedColumnIds = [],
+        settings: cachedSettings = {},
       } = state;
 
       const {
         mappedCards = {},
         mappedColumnCardIds = {},
         orderedColumnIds,
+        settings,
       } = action.payload;
 
       return {
@@ -57,6 +65,10 @@ const canvasReducer = (state = INITIAL_STATE, action) => {
         }, {}),
         mappedColumnCardIds,
         orderedColumnIds: orderedColumnIds || cachedOrderedColumnIds,
+        settings: {
+          ...cachedSettings,
+          ...settings,
+        },
         loading: false,
       };
     }

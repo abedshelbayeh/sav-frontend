@@ -32,15 +32,21 @@ const Card = ({ cardId, index }) => {
     columnId,
   } = useSelector(selectMappedCardsByCardId(cardId), deepEqual);
   const uid = useSelector(({ user: { user: { uid } = {} } = {} }) => uid);
+  const { cardsVisible, votesVisible, votingEnabled, paused } = useSelector(
+    ({ canvas: { settings } }) => settings
+  );
 
   const isCardOwnedByUser = createdBy === uid;
   const hasUserLikedCard = likes[uid];
+  const canUserLike = !isCardOwnedByUser && votingEnabled && !paused;
+  const isCardDisabled = !isCardOwnedByUser || paused;
+  const isCardBlurred = !isCardOwnedByUser && !cardsVisible;
 
   return (
     <Draggable
       draggableId={cardId}
       index={index}
-      isDragDisabled={!isCardOwnedByUser}
+      isDragDisabled={isCardDisabled}
     >
       {(provided, { isDragging }) => (
         <Styled.Card
@@ -49,34 +55,39 @@ const Card = ({ cardId, index }) => {
           ref={provided.innerRef}
           isDragging={isDragging}
           isCardOwnedByUser={isCardOwnedByUser}
+          className={isCardBlurred && "blurred"}
         >
           <Textarea
             autoSave={true}
             localValue={cached}
             cloudValue={text}
             selection={selection}
+            disabled={isCardDisabled}
             onChange={({ value, selection }) => {
               dispatch(updateCard(cardId, value, selection));
             }}
             onSave={() => {
               dispatch(saveCard(cardId));
             }}
-            disabled={!isCardOwnedByUser}
           />
           <Styled.Extra>
             {isCardOwnedByUser && (
               <Styled.Remove
-                onClick={() => dispatch(removeCard(columnId, cardId))}
+                onClick={
+                  !paused ? () => dispatch(removeCard(columnId, cardId)) : null
+                }
               />
             )}
             <Styled.Like
-              {...(!isCardOwnedByUser
-                ? { onClick: () => dispatch(toggleLike(cardId)) }
-                : {})}
+              onClick={() => canUserLike && dispatch(toggleLike(cardId))}
               icon={hasUserLikedCard ? <Styled.Liked /> : <Styled.Unliked />}
-              style={{ cursor: isCardOwnedByUser ? "unset" : "pointer" }}
+              style={{
+                cursor: canUserLike ? "pointer" : "unset",
+              }}
             >
-              {Object.keys(likes).length}
+              {votesVisible && (
+                <Styled.Likes>{Object.keys(likes).length}</Styled.Likes>
+              )}
             </Styled.Like>
           </Styled.Extra>
         </Styled.Card>
