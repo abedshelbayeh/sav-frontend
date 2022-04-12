@@ -5,9 +5,10 @@ import deepEqual from "fast-deep-equal";
 
 // components
 import Column from "./column.component";
+import ControlPanel from "./control-panel.component";
 
 // styled
-import { Spin } from "antd";
+import { Alert, Spin } from "antd";
 import * as Styled from "./canvas.styles";
 
 // actions
@@ -23,12 +24,13 @@ import {
   selectLoading,
 } from "../../redux/canvas/canvas.selectors";
 
-const Canvas = ({ boardId, columns }) => {
+const Canvas = ({ boardId, boardName, columns }) => {
   const dispatch = useDispatch();
 
   const orderedColumnIds = useSelector(selectOrderedColumnIds, deepEqual);
   const loading = useSelector(selectLoading);
   const uid = useSelector(({ user: { user: { uid } = {} } = {} }) => uid);
+  const { paused } = useSelector(({ canvas: { settings } }) => settings);
 
   useEffect(() => {
     dispatch(fetchCardsStart(boardId, columns, uid));
@@ -62,32 +64,42 @@ const Canvas = ({ boardId, columns }) => {
 
   const { innerWidth } = window;
   return (
-    <DragDropContext onDragEnd={onDragEnd}>
-      <Droppable
-        droppableId="canvas"
-        direction={innerWidth <= 850 ? "vertical" : "horizontal"}
-        type="COLUMN"
-      >
-        {(provided) => (
-          <Styled.Container
-            {...provided.droppableProps}
-            ref={provided.innerRef}
-          >
-            {orderedColumnIds.map((columnId, index) => {
-              return (
-                <Column
-                  key={columnId}
-                  boardId={boardId}
-                  title={columnId}
-                  index={index}
-                />
-              );
-            })}
-            {provided.placeholder}
-          </Styled.Container>
+    <>
+      <DragDropContext onDragEnd={onDragEnd}>
+        {paused && (
+          <Alert
+            message="Your host has paused this board. You won't be able to contribute just yet!"
+            type="info"
+            showIcon
+          />
         )}
-      </Droppable>
-    </DragDropContext>
+        <Droppable
+          droppableId="canvas"
+          direction={innerWidth <= 850 ? "vertical" : "horizontal"}
+          type="COLUMN"
+        >
+          {(provided) => (
+            <Styled.Container
+              {...provided.droppableProps}
+              ref={provided.innerRef}
+            >
+              {orderedColumnIds.map((columnId, index) => {
+                return (
+                  <Column
+                    key={columnId}
+                    boardId={boardId}
+                    title={columnId}
+                    index={index}
+                  />
+                );
+              })}
+              {provided.placeholder}
+            </Styled.Container>
+          )}
+        </Droppable>
+      </DragDropContext>
+      <ControlPanel boardName={boardName} />
+    </>
   );
 };
 

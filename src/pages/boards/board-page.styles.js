@@ -46,10 +46,6 @@ export const Title = styled.div`
     height: unset;
     background: transparent !important;
     color: ${({ theme }) => theme.COLOR_PRIMARY_TEXT};
+    overflow: hidden;
   }
-`;
-
-export const Actions = styled.div`
-  display: flex;
-  gap: 5px;
 `;

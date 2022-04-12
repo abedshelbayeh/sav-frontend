@@ -328,6 +328,24 @@ const GlobalStyle = createGlobalStyle`
   .ant-notification-notice-close-x {
     color: ${({ theme }) => theme.COLOR_SECONDARY_TEXT};
   }
+
+  .ant-alert-info {
+    background-color: transparent;
+    border: ${({ theme }) => `0.5px solid ${theme.ALERT_INFO_BACKGROUND}`};
+    border-left: ${({ theme }) => `3px solid ${theme.ALERT_INFO_BACKGROUND}`};
+    border-radius: 2px;
+    padding-left: 10px; 
+    margin: 5px 0;
+    
+    & .ant-alert-message {
+      color: ${({ theme }) => theme.ALERT_INFO_COLOR};
+      font-weight: 600;
+    }
+
+    & .anticon {
+      color: ${({ theme }) => theme.ALERT_INFO_BACKGROUND};
+    }
+  }
 `;
 
 export default GlobalStyle;

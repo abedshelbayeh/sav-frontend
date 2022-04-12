@@ -23,9 +23,10 @@ const Column = ({ title, index }) => {
     selectMappedColumnCardIdsByColumnId(title),
     deepEqual
   );
+  const { paused } = useSelector(({ canvas: { settings } }) => settings);
 
   return (
-    <Draggable draggableId={title} index={index}>
+    <Draggable draggableId={title} index={index} isDragDisabled={paused}>
       {(provided, { isDragging }) => (
         <Styled.Column
           {...provided.draggableProps}
@@ -37,7 +38,11 @@ const Column = ({ title, index }) => {
               <HolderOutlined />
               {title.toUpperCase()}
             </Styled.Title>
-            <PlusCircleFilled onClick={() => dispatch(addCard(title))} />
+            <PlusCircleFilled
+              onClick={
+                !paused ? () => dispatch(dispatch(addCard(title))) : null
+              }
+            />
           </Styled.Header>
           <Droppable droppableId={title} type="CARD">
             {(provided, { isDraggingOver }) => (

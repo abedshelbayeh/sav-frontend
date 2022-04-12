@@ -189,3 +189,42 @@ export const toggleLike = (cardId) => {
     });
   };
 };
+
+export const toggleCardsVisibility = () => {
+  return async (_, getState) => {
+    const { canvas: { boardId, settings: { cardsVisible } = {} } = {} } =
+      getState();
+    update(ref(database), {
+      [`/boards/${boardId}/settings/cardsVisible`]: !cardsVisible,
+    });
+  };
+};
+
+export const toggleVotingAbility = () => {
+  return async (_, getState) => {
+    const { canvas: { boardId, settings: { votingEnabled } = {} } = {} } =
+      getState();
+    update(ref(database), {
+      [`/boards/${boardId}/settings/votingEnabled`]: !votingEnabled,
+    });
+  };
+};
+
+export const toggleVotingVisibility = () => {
+  return async (_, getState) => {
+    const { canvas: { boardId, settings: { votesVisible } = {} } = {} } =
+      getState();
+    update(ref(database), {
+      [`/boards/${boardId}/settings/votesVisible`]: !votesVisible,
+    });
+  };
+};
+
+export const togglePause = () => {
+  return async (_, getState) => {
+    const { canvas: { boardId, settings: { paused } = {} } = {} } = getState();
+    update(ref(database), {
+      [`/boards/${boardId}/settings/paused`]: !paused,
+    });
+  };
+};

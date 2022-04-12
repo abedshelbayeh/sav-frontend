@@ -87,6 +87,13 @@ export const Card = styled.div`
   padding: 10px 10px 5px 10px;
   box-shadow: rgba(0, 0, 0, 0.15) 0 1px 2px 0;
   -webkit-box-shadow: rgba(0, 0, 0, 0.15) 0 1px 2px 0;
+
+  &.blurred .card-text {
+    filter: blur(5px);
+    -webkit-filter: blur(5px);
+    user-select: none;
+    -webkit-user-select: none;
+  }
 `;
 
 export const Extra = styled.div`
@@ -107,6 +114,15 @@ export const Like = styled(Tag)`
   &::after {
     display: none;
   }
+
+  & span {
+    margin: 0 !important;
+  }
+`;
+
+export const Likes = styled.div`
+  margin: 0 0 0 7px;
+  display: inline;
 `;
 
 export const Liked = styled(LikeFilled)`
