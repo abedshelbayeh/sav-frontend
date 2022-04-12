@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.0](https://github.com/project-savvy/sav-frontend/compare/v0.3.0...v0.4.0) (2022-04-12)
+
+
+### Features
+
+* [#13](https://github.com/project-savvy/sav-frontend/issues/13) Moderator actions ([3961f55](https://github.com/project-savvy/sav-frontend/commit/3961f55516061ad457334678bd2d1a1f29e772f5))
+
 ## [0.3.0](https://github.com/project-savvy/sav-frontend/compare/v0.2.1...v0.3.0) (2022-04-10)
 
 
