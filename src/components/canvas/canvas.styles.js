@@ -136,3 +136,12 @@ export const Unliked = styled(LikeOutlined)`
 export const Remove = styled(DeleteOutlined)`
   color: ${({ theme }) => theme.COLOR_DANGER};
 `;
+
+// sidebar
+export const Sidebar = styled.div`
+  position: fixed;
+  top: 70px;
+  right: 0;
+  display: flex;
+  pointer-events: none;
+`;

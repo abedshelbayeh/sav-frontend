@@ -11,6 +11,7 @@ import {
   EditOutlined,
   HourglassOutlined,
   LikeOutlined,
+  MinusSquareOutlined,
   NumberOutlined,
   PauseCircleOutlined,
   SearchOutlined,
@@ -26,6 +27,7 @@ import {
 import {
   toggleCardsVisibility,
   togglePause,
+  toggleTimer,
   toggleVotingAbility,
   toggleVotingVisibility,
 } from "../../redux/canvas/canvas.actions";
@@ -44,12 +46,11 @@ const ControlPanel = ({ boardName }) => {
     panel.classList.toggle("open");
   };
 
-  const { cardsVisible, votingEnabled, votesVisible, paused } = useSelector(
-    ({ canvas: { settings } }) => settings
-  );
+  const { cardsVisible, votingEnabled, votesVisible, paused, timer } =
+    useSelector(({ canvas: { settings } }) => settings);
 
   return (
-    <>
+    <Styled.Container>
       <Styled.Handle
         ref={handleRef}
         onClick={() => {
@@ -59,8 +60,23 @@ const ControlPanel = ({ boardName }) => {
         <SlidersOutlined />
       </Styled.Handle>
       <Styled.Panel ref={panelRef}>
-        <Styled.Item placement="left" title="Start timer">
-          <HourglassOutlined onClick={() => {}} />
+        <Styled.Item>
+          <MinusSquareOutlined
+            onClick={() => {
+              togglePanel();
+            }}
+          />
+        </Styled.Item>
+        <Styled.Item
+          enabled={!!timer}
+          placement="left"
+          title={timer ? "Hide timer" : "Start timer"}
+        >
+          <HourglassOutlined
+            onClick={() => {
+              dispatch(toggleTimer());
+            }}
+          />
         </Styled.Item>
         <Styled.Item
           enabled={cardsVisible}
@@ -126,7 +142,7 @@ const ControlPanel = ({ boardName }) => {
           />
         </Styled.Item>
       </Styled.Panel>
-    </>
+    </Styled.Container>
   );
 };
 

@@ -39,9 +39,7 @@ const Column = ({ title, index }) => {
               {title.toUpperCase()}
             </Styled.Title>
             <PlusCircleFilled
-              onClick={
-                !paused ? () => dispatch(dispatch(addCard(title))) : null
-              }
+              onClick={!paused ? () => dispatch(addCard(title)) : null}
             />
           </Styled.Header>
           <Droppable droppableId={title} type="CARD">

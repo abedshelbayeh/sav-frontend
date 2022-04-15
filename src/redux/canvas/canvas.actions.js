@@ -228,3 +228,99 @@ export const togglePause = () => {
     });
   };
 };
+
+export const toggleTimer = () => {
+  return async (_, getState) => {
+    const { canvas: { boardId, settings: { timer } = {} } = {} } = getState();
+    update(ref(database), {
+      [`/boards/${boardId}/settings/timer`]: !!timer
+        ? false
+        : {
+            running: false,
+            time: 300 * 1000,
+            pause: 300 * 1000,
+            deadline: null,
+          },
+    });
+  };
+};
+
+export const setTime = (ms) => {
+  return async (_, getState) => {
+    const {
+      canvas: { boardId },
+    } = getState();
+    update(ref(database), {
+      [`/boards/${boardId}/settings/timer/time`]: ms,
+      [`/boards/${boardId}/settings/timer/pause`]: ms,
+      [`/boards/${boardId}/settings/timer/deadline`]: null,
+    });
+  };
+};
+
+export const startTimer = () => {
+  return async (_, getState) => {
+    const {
+      canvas: {
+        boardId,
+        settings: {
+          timer: { pause },
+        },
+      },
+    } = getState();
+
+    let deadline = new Date();
+    deadline.setMilliseconds(deadline.getMilliseconds() + pause);
+
+    update(ref(database), {
+      [`/boards/${boardId}/settings/timer/running`]: true,
+      [`/boards/${boardId}/settings/timer/pause`]: null,
+      [`/boards/${boardId}/settings/timer/deadline`]: deadline
+        ? Date.parse(deadline)
+        : null,
+    });
+  };
+};
+
+export const pauseTimer = (ms) => {
+  return async (_, getState) => {
+    const {
+      canvas: { boardId },
+    } = getState();
+    update(ref(database), {
+      [`/boards/${boardId}/settings/timer/running`]: false,
+      [`/boards/${boardId}/settings/timer/pause`]: ms,
+      [`/boards/${boardId}/settings/timer/deadline`]: null,
+    });
+  };
+};
+
+export const addTime = (ms) => {
+  return async (_, getState) => {
+    const {
+      canvas: {
+        boardId,
+        settings: {
+          timer: { running },
+        },
+      },
+    } = getState();
+
+    let pause = ms;
+    let deadline = null;
+
+    if (running) {
+      pause = null;
+      deadline = new Date();
+      deadline.setMilliseconds(deadline.getMilliseconds() + ms);
+    }
+
+    update(ref(database), {
+      [`/boards/${boardId}/settings/timer/time`]: ms,
+      [`/boards/${boardId}/settings/timer/pause`]: pause,
+      [`/boards/${boardId}/settings/timer/deadline`]: deadline
+        ? Date.parse(deadline)
+        : null,
+    });
+  };
+};
