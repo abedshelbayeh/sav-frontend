@@ -21,10 +21,10 @@ const canvasReducer = (state = INITIAL_STATE, action) => {
     case CanvasActionTypes.FETCH_CARDS_START: {
       const { boardId, orderedColumnIds } = action.payload;
       return {
-        ...state,
+        ...INITIAL_STATE,
         boardId,
-        orderedColumnIds,
         loading: true,
+        orderedColumnIds,
       };
     }
 
@@ -46,7 +46,7 @@ const canvasReducer = (state = INITIAL_STATE, action) => {
         mappedCards = {},
         mappedColumnCardIds = {},
         orderedColumnIds,
-        settings,
+        settings = {},
       } = action.payload;
 
       return {

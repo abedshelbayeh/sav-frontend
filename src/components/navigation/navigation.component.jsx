@@ -121,7 +121,7 @@ const Navigation = ({ setLayloutClass }) => {
               dispatch(setTheme(theme === "light" ? "dark" : "light"));
               setTimeout(() => {
                 setLayloutClass();
-              }, 100);
+              }, 10);
             }}
           />
         </Styled.SecondaryItem>
@@ -132,6 +132,7 @@ const Navigation = ({ setLayloutClass }) => {
           overlay={
             <Menu>
               <Menu.Item
+                key="sign-out"
                 onClick={() => handleNavigate(() => signOut())}
                 icon={<LogoutOutlined />}
               >

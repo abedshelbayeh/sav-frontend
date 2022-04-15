@@ -34,6 +34,11 @@ const theme = {
   ALERT_INFO_BACKGROUND: "rgb(80,153,233)",
   ALERT_INFO_COLOR: "black",
 
+  FLOAT_BACKGROUND: "rgb(255, 255, 255)",
+  FLOAT_COLOR: "rgba(28,30,33)",
+
+  TIMER_PROGRESS_BACKGROUND: "rgba(35, 116, 225, 0.1)",
+
   // antd
   primaryColor: "#1890ff",
   lighterPrimaryColor: "#1890ff",

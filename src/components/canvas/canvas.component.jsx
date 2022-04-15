@@ -6,6 +6,7 @@ import deepEqual from "fast-deep-equal";
 // components
 import Column from "./column.component";
 import ControlPanel from "./control-panel.component";
+import Timer from "../timer/timer.component";
 
 // styled
 import { Alert, Spin } from "antd";
@@ -30,7 +31,7 @@ const Canvas = ({ boardId, boardName, columns }) => {
   const orderedColumnIds = useSelector(selectOrderedColumnIds, deepEqual);
   const loading = useSelector(selectLoading);
   const uid = useSelector(({ user: { user: { uid } = {} } = {} }) => uid);
-  const { paused } = useSelector(({ canvas: { settings } }) => settings);
+  const { paused, timer } = useSelector(({ canvas: { settings } }) => settings);
 
   useEffect(() => {
     dispatch(fetchCardsStart(boardId, columns, uid));
@@ -98,7 +99,10 @@ const Canvas = ({ boardId, boardName, columns }) => {
           )}
         </Droppable>
       </DragDropContext>
-      <ControlPanel boardName={boardName} />
+      <Styled.Sidebar>
+        {!!timer && <Timer />}
+        <ControlPanel boardName={boardName} />
+      </Styled.Sidebar>
     </>
   );
 };

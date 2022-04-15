@@ -1,60 +1,70 @@
 import { Tooltip } from "antd";
 import styled from "styled-components";
 
-export const Wrapper = styled.div``;
+export const Container = styled.div`
+  display: flex;
+`;
 
 export const Handle = styled.div`
-  position: fixed;
-  top: 70px;
-  right: 0;
-  background-color: ${({ theme }) => theme.BACKGROUND_50_TRANSPARENT};
-  box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 2px 0px;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-right: 20px;
-  transition: all 0.25s;
+  margin: 0 25px 0 0;
+  width: 40px;
+  height: 40px;
+  pointer-events: all;
   cursor: pointer;
+  transition: transform 0.25s;
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    background-color: ${({ theme }) => theme.FLOAT_BACKGROUND};
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 2px 0px;
+    border-radius: 50%;
+    transition: transform 0.25s;
+  }
+
+  &:hover::after {
+    transform: scale(1.1);
+  }
 
   & .anticon {
     font-size: 16pt;
-    color: ${({ theme }) => theme.COLOR_PRIMARY_TEXT};
-  }
-
-  &:hover:not(.open) {
-    margin: 0 25px 0 0;
+    color: ${({ theme }) => theme.FLOAT_COLOR};
   }
 
   &.open {
-    margin-right: 80px;
+    transform: translate(200%);
   }
 `;
 
 export const Panel = styled.div`
-  position: fixed;
-  top: 70px;
-  right: 0;
-  background-color: ${({ theme }) => theme.BACKGROUND_50_TRANSPARENT};
-  box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 2px 0px;
-  border-radius: 5px;
   display: flex;
   flex-direction: column;
   gap: 20px;
-  margin-right: -50px;
+  min-height: 100%;
+  margin: 0 -45px 0 0;
   padding: 10px;
-  transition: all 0.3s;
-  border: ${({ theme }) => theme.COLOR_SOLID_BORDER};
-  color: ${({ theme }) => theme.COLOR_PRIMARY_TEXT};
+  background-color: ${({ theme }) => theme.FLOAT_BACKGROUND};
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 2px 0px;
+  border-radius: 5px;
+  color: ${({ theme }) => theme.FLOAT_COLOR};
+  pointer-events: all;
+  transition: transform 0.25s;
 
   & .anticon {
     font-size: 18pt;
   }
 
   &.open {
-    margin-right: 20px;
+    transform: translate(-150%);
   }
 `;
 
@@ -73,7 +83,7 @@ export const Item = styled(Tooltip)`
       if (danger) {
         return theme.COLOR_DANGER;
       }
-      return theme.COLOR_PRIMARY_TEXT;
+      return theme.FLOAT_COLOR;
     }};
 
   :hover.anticon {
