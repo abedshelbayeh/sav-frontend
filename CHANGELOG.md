@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.0](https://github.com/project-savvy/sav-frontend/compare/v0.4.0...v0.5.0) (2022-04-15)
+
+
+### Features
+
+* [#16](https://github.com/project-savvy/sav-frontend/issues/16) Introduce a timer as a moderator action ([0e19867](https://github.com/project-savvy/sav-frontend/commit/0e198673b8fc3225d9aa0e556b762d13944a010c))
+
 ## [0.4.0](https://github.com/project-savvy/sav-frontend/compare/v0.3.0...v0.4.0) (2022-04-12)
 
 
