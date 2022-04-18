@@ -1,43 +1,46 @@
-import { Tooltip } from "antd";
 import styled from "styled-components";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { forwardRef } from "react";
 
 export const Container = styled.div`
   display: flex;
 `;
 
+export const Overlay = styled.div`
+  transition: background-color 0.25s;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+
+  &.open {
+    background-color: rgba(0, 0, 0, 0.5);
+    pointer-events: all;
+  }
+`;
+
 export const Handle = styled.div`
-  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 25px 0 0;
+  margin: 0 22px 0 0;
   width: 40px;
   height: 40px;
   pointer-events: all;
   cursor: pointer;
   transition: transform 0.25s;
+  background-color: ${({ theme }) => theme.primaryColor};
+  border-radius: 50%;
 
-  &::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: -1;
-    background-color: ${({ theme }) => theme.FLOAT_BACKGROUND};
-    box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 2px 0px;
-    border-radius: 50%;
-    transition: transform 0.25s;
-  }
-
-  &:hover::after {
+  &:hover {
     transform: scale(1.1);
   }
 
-  & .anticon {
-    font-size: 16pt;
-    color: ${({ theme }) => theme.FLOAT_COLOR};
+  & svg {
+    font-size: 14pt;
+    color: white;
   }
 
   &.open {
@@ -48,20 +51,16 @@ export const Handle = styled.div`
 export const Panel = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 30px;
   min-height: 100%;
-  margin: 0 -45px 0 0;
-  padding: 10px;
-  background-color: ${({ theme }) => theme.FLOAT_BACKGROUND};
-  box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 2px 0px;
-  border-radius: 5px;
-  color: ${({ theme }) => theme.FLOAT_COLOR};
+  margin: 0 -65px 0 0;
+  padding: 10px 10px 20px 10px;
+  background-color: ${({ theme }) => theme.BG_FLOAT};
+  box-shadow: rgba(0, 0, 0, 0.25) 0 1px 2px 0;
+  border-radius: 2px;
+  color: ${({ theme }) => theme.TEXT_PRIMARY};
   pointer-events: all;
   transition: transform 0.25s;
-
-  & .anticon {
-    font-size: 18pt;
-  }
 
   &.open {
     transform: translate(-150%);
@@ -70,23 +69,36 @@ export const Panel = styled.div`
 
 export const Seperator = styled.div`
   height: 1px;
-  background-color: ${({ theme }) => theme.COLOR_SECONDARY_TEXT};
+  background-color: ${({ theme }) => theme.TEXT_SECONDARY};
   border-radius: 10px;
 `;
 
-export const Item = styled(Tooltip)`
-  &.anticon {
-    color: ${({ enabled, danger, theme }) => {
-      if (enabled) {
-        return theme.COLOR_POSITIVE;
-      }
-      if (danger) {
-        return theme.COLOR_DANGER;
-      }
-      return theme.FLOAT_COLOR;
-    }};
+export const Minimize = styled(
+  forwardRef((props, ref) => <FontAwesomeIcon {...props} forwardedRef={ref} />)
+)`
+  cursor: pointer;
 
-  :hover.anticon {
+  :hover {
+    color: ${({ theme }) => theme.primaryColor};
+  }
+`;
+
+export const Icon = styled(
+  forwardRef((props, ref) => <FontAwesomeIcon {...props} forwardedRef={ref} />)
+)`
+  cursor: pointer;
+  font-size: 16pt;
+  color: ${({ $enabled, $danger, theme }) => {
+    if ($enabled) {
+      return theme.COLOR_POSITIVE;
+    }
+    if ($danger) {
+      return theme.COLOR_DANGER;
+    }
+    return theme.TEXT_PRIMARY;
+  }};
+
+  :hover {
     color: ${({ theme }) => theme.primaryColor};
   }
 `;

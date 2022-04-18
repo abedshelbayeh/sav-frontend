@@ -3,25 +3,31 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 // components
+import Counts from "../common/counts.component";
 import confirm from "./utils/confirm-delete";
 
 // styles
+import { Table, Button } from "antd";
+import { FontAwesomeIcon as Icon } from "@fortawesome/react-fontawesome";
+import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
+import { faTrashCan } from "@fortawesome/free-regular-svg-icons";
 import * as Styled from "./boards.styles";
-import { Table, Badge, Button } from "antd";
-import { DeleteOutlined, EditFilled } from "@ant-design/icons";
 
 // actions
 import {
   deleteBoard,
   fetchBoardsStart,
   toggleEditBoard,
+  setFilter,
 } from "../../redux/boards/boards.actions";
 
 const Boards = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { data, pagination, loading } = useSelector(({ boards }) => boards);
+  const { filter, data, pagination, loading } = useSelector(
+    ({ boards }) => boards
+  );
 
   useEffect(() => {
     dispatch(fetchBoardsStart());
@@ -52,9 +58,7 @@ const Boards = () => {
       title: "Participants",
       dataIndex: "numberOfParticipants",
       key: "numberOfParticipants",
-      render: (number) => (
-        <Styled.NumberOfParticipants count={number} overflowCount={Infinity} />
-      ),
+      render: (number) => <span>{number}</span>,
       responsive: ["sm"],
     },
     {
@@ -64,14 +68,14 @@ const Boards = () => {
             onClick={() => dispatch(toggleEditBoard(id))}
             type="link"
             size="small"
-            icon={<EditFilled />}
+            icon={<Icon icon={faPenToSquare} />}
           />
           <Button
             onClick={() => confirm(name, async () => dispatch(deleteBoard(id)))}
             type="text"
             size="small"
             danger
-            icon={<DeleteOutlined />}
+            icon={<Icon icon={faTrashCan} />}
           />
         </Styled.Actions>
       ),
@@ -82,9 +86,26 @@ const Boards = () => {
   return (
     <>
       <Styled.Header>
-        <h2>Boards</h2>
-        <Badge count={total} />
+        <Styled.Search
+          placeholder="Search boards..."
+          onSearch={(filter) => dispatch(setFilter(filter))}
+          size="large"
+          defaultValue={filter}
+        />
+        <Button
+          size="large"
+          type="primary"
+          onClick={() => dispatch(toggleEditBoard())}
+        >
+          Create a board
+        </Button>
       </Styled.Header>
+      <Counts
+        counts={[
+          { title: "Active", count: total },
+          { title: "Archived", count: 0 },
+        ]}
+      />
       <Table
         dataSource={data}
         columns={columns}

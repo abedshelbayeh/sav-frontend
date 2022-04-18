@@ -1,4 +1,5 @@
 import { Button } from "antd";
+import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
 import * as Styled from "./card.styles";
 
 const Card = ({ id, title, description, cover, selected, onSelect }) => {
@@ -15,7 +16,7 @@ const Card = ({ id, title, description, cover, selected, onSelect }) => {
           </Styled.Actions>
         </Styled.Overlay>
         <Styled.Selected selected={selected}>
-          <Styled.SelectedIcon />
+          <Styled.SelectedIcon icon={faCircleCheck} />
         </Styled.Selected>
       </Styled.Card>
       <Styled.Title level={5}>{title}</Styled.Title>

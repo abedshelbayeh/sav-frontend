@@ -2,7 +2,9 @@ import { useDispatch, useSelector } from "react-redux";
 
 // styles
 import { Button, Form, Input, Modal } from "antd";
-import { PlusOutlined, DeleteOutlined } from "@ant-design/icons";
+import { FontAwesomeIcon as Icon } from "@fortawesome/react-fontawesome";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faTrashCan } from "@fortawesome/free-regular-svg-icons";
 import * as Styled from "./people.styles";
 
 // actions
@@ -64,8 +66,9 @@ const InvitePeople = () => {
                           <Button
                             type="link"
                             danger
-                            icon={<DeleteOutlined />}
-                            style={{ width: "100%", height: "100%" }}
+                            icon={<Icon icon={faTrashCan} />}
+                            style={{ width: "100%" }}
+                            size="small"
                             onClick={() => remove(field.name)}
                           />
                         )
@@ -78,8 +81,7 @@ const InvitePeople = () => {
                 <Styled.InviteAnotherButton
                   type="dashed"
                   onClick={() => add()}
-                  style={{ width: "100%" }}
-                  icon={<PlusOutlined />}
+                  icon={<Icon icon={faPlus} />}
                 >
                   Invite another person
                 </Styled.InviteAnotherButton>

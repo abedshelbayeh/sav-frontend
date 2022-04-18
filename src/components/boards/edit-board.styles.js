@@ -13,7 +13,7 @@ export const Container = styled.div`
 export const Stepper = styled.div`
   display: none;
 
-  @media screen and (min-width: 850px) {
+  @media screen and (min-width: 851px) {
     margin: 50px 90px 0 0;
     background-color: inherit;
     z-index: 3;
@@ -35,7 +35,7 @@ export const Content = styled.div`
 export const Actions = styled.div`
   position: absolute;
   bottom: 0px;
-  right: 25px;
+  right: 20px;
   align-self: flex-end;
-  padding: 0 0 25px 0;
+  padding: 0 0 20px 0;
 `;

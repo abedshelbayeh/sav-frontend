@@ -5,8 +5,19 @@ export const Header = styled.div`
   position: sticky;
   top: 0;
   z-index: 3;
-  padding: 0 0 20px 0;
-  background-color: ${({ theme }) => theme.BACKGROUND_200_TRANSPARENT};
+  padding: 25px 0 20px 0;
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: ${({ theme }) => theme.BG100};
+    opacity: 0.85;
+    z-index: -1;
+  }
 `;
 
 export const Search = styled(Input.Search)`
@@ -26,7 +37,7 @@ export const Loading = styled.div`
 
 export const Title = styled(Typography.Title)`
   margin: 15px 0 0 0;
-  color: ${({ theme }) => theme.COLOR_PRIMARY_TEXT} !important;
+  color: ${({ theme }) => theme.TEXT_PRIMARY};
 `;
 
 export const Templates = styled.div`

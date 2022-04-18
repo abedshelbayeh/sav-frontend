@@ -7,6 +7,7 @@ import { Draggable } from "react-beautiful-dnd";
 import Textarea from "../card/textarea.component";
 
 // styles
+import { faTrashCan } from "@fortawesome/free-regular-svg-icons";
 import * as Styled from "./canvas.styles";
 
 // actions
@@ -73,6 +74,7 @@ const Card = ({ cardId, index }) => {
           <Styled.Extra>
             {isCardOwnedByUser && (
               <Styled.Remove
+                icon={faTrashCan}
                 onClick={
                   !paused ? () => dispatch(removeCard(columnId, cardId)) : null
                 }

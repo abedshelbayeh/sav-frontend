@@ -3,13 +3,19 @@ import { useDispatch, useSelector } from "react-redux";
 
 // components
 import Avatar from "../common/avatar.component";
+import InvitePeople from "../../components/people/invite-people.component";
+import Counts from "../common/counts.component";
 
 // styles
 import * as Styled from "./people.styles";
-import { Badge, Table } from "antd";
+import { Button, Table } from "antd";
 
 // actions
-import { fetchPeopleStart } from "../../redux/people/people.actions";
+import {
+  fetchPeopleStart,
+  toggleInvitePeople,
+  setFilter,
+} from "../../redux/people/people.actions";
 
 const columns = [
   {
@@ -31,7 +37,9 @@ const columns = [
 const People = () => {
   const dispatch = useDispatch();
 
-  const { data, pagination, loading } = useSelector(({ people }) => people);
+  const { filter, data, pagination, loading } = useSelector(
+    ({ people }) => people
+  );
 
   useEffect(() => {
     dispatch(fetchPeopleStart());
@@ -40,10 +48,23 @@ const People = () => {
   const { total } = pagination;
   return (
     <>
+      <InvitePeople />
       <Styled.Header>
-        <h2>People</h2>
-        <Badge count={total} overflowCount={Infinity} />
+        <Styled.Search
+          placeholder="Search people..."
+          onSearch={(filter) => dispatch(setFilter(filter))}
+          defaultValue={filter}
+          size="large"
+        />
+        <Button
+          type="primary"
+          size="large"
+          onClick={() => dispatch(toggleInvitePeople())}
+        >
+          Invite
+        </Button>
       </Styled.Header>
+      <Counts counts={[{ title: "Active", count: total }]} />
       <Table
         dataSource={data}
         columns={columns}

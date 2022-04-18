@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { Tag } from "antd";
-import { DeleteOutlined, LikeFilled, LikeOutlined } from "@ant-design/icons";
+import { FontAwesomeIcon as Icon } from "@fortawesome/react-fontawesome";
+import { LikeFilled, LikeOutlined } from "@ant-design/icons";
 
 export const Loading = styled.div`
   position: absolute;
@@ -25,35 +26,41 @@ export const Column = styled.div`
   flex-grow: 1;
   flex-basis: 0;
   margin: 5px;
-  background-color: ${({ theme }) => theme.CANVAS_COLUMN_BACKGROUND};
+  background-color: ${({ theme }) => theme.BG_CANVAS_COLUMN};
   transition: background-color 0.25s ease;
-  border-radius: 8px;
+  border-radius: 2px;
+  box-shadow: 0 2px 1px -1px rgb(0 0 0 / 20%), 0 1px 1px 0 rgb(0 0 0 / 14%),
+    0 1px 3px 0 rgb(0 0 0 / 12%);
 `;
 
 export const Header = styled.div`
-  color: ${({ theme }) => theme.COLOR_SECONDARY_TEXT};
+  color: ${({ theme }) => theme.TEXT_SECONDARY};
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px;
-  border-radius: 8px 8px 0px 0px;
+  padding: 10px 11px 10px 13px;
+  border-radius: 2px 2px 0px 0px;
   transition: background-color 0.25s ease;
   font-weight: 600;
-  font-size: 22px;
+  font-size: 18pt;
   background-color: ${({ isDragging, theme }) =>
-    isDragging ? theme.CANVAS_COLUMN_BACKGROUND_DRAGGING : "inherit"}}
+    isDragging ? theme.BG_CANVAS_COLUMN_DRAGGING : "inherit"}}
   
   &:hover {
-    background-color: ${({ theme }) => theme.CANVAS_COLUMN_BACKGROUND_DRAGGING};
+    background-color: ${({ theme }) => theme.BG_CANVAS_COLUMN_DRAGGING};
   }
 `;
 
+export const AddCard = styled(Icon)`
+  cursor: ${({ onClick }) => (!!onClick ? "pointer" : "unset")};
+`;
+
 export const Title = styled.div`
-  color: ${({ theme }) => theme.COLOR_PRIMARY_TEXT};
+  color: ${({ theme }) => theme.TEXT_PRIMARY};
   display: flex;
   align-items: center;
-  gap: 5px;
-  font-size: 15px;
+  gap: 8px;
+  font-size: 12pt;
 `;
 
 export const Cards = styled.div`
@@ -61,10 +68,10 @@ export const Cards = styled.div`
   flex-direction: column;
   flex-grow: 1;
   padding: 5px;
-  border-radius: 0 0 8px 8px;
+  border-radius: 0 0 2px 2px;
   transition: background-color 0.25s ease;
   background-color: ${({ isDraggingOver, theme }) =>
-    isDraggingOver ? theme.CANVAS_COLUMN_BACKGROUND_DRAGGING : "inherit"};
+    isDraggingOver ? theme.BG_CANVAS_COLUMN_DRAGGING : "inherit"};
 `;
 
 export const Empty = styled.div`
@@ -79,14 +86,11 @@ export const Card = styled.div`
   display: flex;
   flex-direction: column;
   margin: 6px 5px;
-  background-color: ${({ isCardOwnedByUser, theme }) =>
-    isCardOwnedByUser
-      ? theme.CANVAS_CARD_BACKGROUND_OWNED
-      : theme.CANVAS_CARD_BACKGROUND};
-  border-radius: 5px;
+  background-color: ${({ theme }) => theme.BG_CANVAS_CARD};
+  border-left: ${({ isCardOwnedByUser, theme }) =>
+    isCardOwnedByUser ? `2px solid ${theme.primaryColor}` : "none"};
+  border-radius: 2px;
   padding: 10px 10px 5px 10px;
-  box-shadow: rgba(0, 0, 0, 0.15) 0 1px 2px 0;
-  -webkit-box-shadow: rgba(0, 0, 0, 0.15) 0 1px 2px 0;
 
   &.blurred .card-text {
     filter: blur(5px);
@@ -105,7 +109,7 @@ export const Extra = styled.div`
 
 export const Like = styled(Tag)`
   background-color: inherit;
-  color: ${({ theme }) => theme.COLOR_PRIMARY_TEXT};
+  color: ${({ theme }) => theme.TEXT_PRIMARY};
   margin: 0;
   padding: 0;
   border: none;
@@ -121,7 +125,7 @@ export const Like = styled(Tag)`
 `;
 
 export const Likes = styled.div`
-  margin: 0 0 0 7px;
+  margin: 0 0 0 4px;
   display: inline;
 `;
 
@@ -130,18 +134,19 @@ export const Liked = styled(LikeFilled)`
 `;
 
 export const Unliked = styled(LikeOutlined)`
-  color: ${({ theme }) => theme.COLOR_SECONDARY_TEXT};
+  color: ${({ theme }) => theme.TEXT_SECONDARY};
 `;
 
-export const Remove = styled(DeleteOutlined)`
+export const Remove = styled(Icon)`
+  cursor: ${({ onClick }) => (!!onClick ? "pointer" : "unset")};
   color: ${({ theme }) => theme.COLOR_DANGER};
 `;
 
 // sidebar
 export const Sidebar = styled.div`
   position: fixed;
-  top: 70px;
-  right: 0;
+  top: 15px;
+  right: 15px;
   display: flex;
   pointer-events: none;
 `;

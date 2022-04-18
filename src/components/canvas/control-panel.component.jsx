@@ -6,17 +6,19 @@ import { useNavigate, useParams } from "react-router-dom";
 import confirm from "../boards/utils/confirm-delete";
 
 // styles
+import { Tooltip } from "antd";
+import { FontAwesomeIcon as Icon } from "@fortawesome/react-fontawesome";
 import {
-  DeleteOutlined,
-  EditOutlined,
-  HourglassOutlined,
-  LikeOutlined,
-  MinusSquareOutlined,
-  NumberOutlined,
-  PauseCircleOutlined,
-  SearchOutlined,
-  SlidersOutlined,
-} from "@ant-design/icons";
+  faSliders,
+  faWindowMinimize,
+  faHourglass,
+  faEye,
+  faHashtag,
+  faPause,
+  faThumbsUp,
+  faPenToSquare,
+} from "@fortawesome/free-solid-svg-icons";
+import { faTrashCan } from "@fortawesome/free-regular-svg-icons";
 import * as Styled from "./control-panel.styles";
 
 // actions
@@ -37,11 +39,16 @@ const ControlPanel = ({ boardName }) => {
   const navigate = useNavigate();
   const { boardId } = useParams();
 
+  const overlayRef = createRef();
   const handleRef = createRef();
   const panelRef = createRef();
+
   const togglePanel = () => {
+    const overlay = overlayRef.current;
     const handle = handleRef.current;
     const panel = panelRef.current;
+
+    overlay.classList.toggle("open");
     handle.classList.toggle("open");
     panel.classList.toggle("open");
   };
@@ -51,70 +58,70 @@ const ControlPanel = ({ boardName }) => {
 
   return (
     <Styled.Container>
+      <Styled.Overlay ref={overlayRef} onClick={() => togglePanel()} />
       <Styled.Handle
         ref={handleRef}
         onClick={() => {
           togglePanel();
         }}
       >
-        <SlidersOutlined />
+        <Icon icon={faSliders} />
       </Styled.Handle>
       <Styled.Panel ref={panelRef}>
-        <Styled.Item>
-          <MinusSquareOutlined
-            onClick={() => {
-              togglePanel();
-            }}
-          />
-        </Styled.Item>
-        <Styled.Item
-          enabled={!!timer}
-          placement="left"
-          title={timer ? "Hide timer" : "Start timer"}
-        >
-          <HourglassOutlined
+        <Styled.Minimize
+          icon={faWindowMinimize}
+          onClick={() => {
+            togglePanel();
+          }}
+        />
+        <Tooltip placement="left" title={timer ? "Hide timer" : "Start timer"}>
+          <Styled.Icon
+            $enabled={!!timer}
+            icon={faHourglass}
             onClick={() => {
               dispatch(toggleTimer());
             }}
           />
-        </Styled.Item>
-        <Styled.Item
-          enabled={cardsVisible}
+        </Tooltip>
+        <Tooltip
           placement="left"
           title={
             cardsVisible ? "Hide other people's cards" : "Show everyone's cards"
           }
         >
-          <SearchOutlined
+          <Styled.Icon
+            $enabled={cardsVisible}
+            icon={faEye}
             onClick={() => {
               dispatch(toggleCardsVisibility());
             }}
           />
-        </Styled.Item>
-        <Styled.Item
-          enabled={votesVisible}
+        </Tooltip>
+        <Tooltip
           placement="left"
           title={votesVisible ? "Hide number of likes" : "Show number of likes"}
         >
-          <NumberOutlined
+          <Styled.Icon
+            icon={faHashtag}
+            $enabled={votesVisible}
             onClick={() => {
               dispatch(toggleVotingVisibility());
             }}
           />
-        </Styled.Item>
-        <Styled.Item
-          enabled={paused}
+        </Tooltip>
+        <Tooltip
           placement="left"
           title={paused ? "Unpause board" : "Pause board"}
         >
-          <PauseCircleOutlined
+          <Styled.Icon
+            icon={faPause}
+            $enabled={paused}
             onClick={() => {
               dispatch(togglePause());
             }}
           />
-        </Styled.Item>
-        <Styled.Item
-          enabled={votingEnabled}
+        </Tooltip>
+        <Tooltip
           placement="left"
           title={
             votingEnabled
@@ -122,25 +129,32 @@ const ControlPanel = ({ boardName }) => {
               : "Enable the ability to like"
           }
         >
-          <LikeOutlined
+          <Styled.Icon
+            $enabled={votingEnabled}
+            icon={faThumbsUp}
             onClick={() => {
               dispatch(toggleVotingAbility());
             }}
           />
-        </Styled.Item>
+        </Tooltip>
         <Styled.Seperator />
-        <Styled.Item placement="left" title="Edit board">
-          <EditOutlined onClick={() => dispatch(toggleEditBoard(boardId))} />
-        </Styled.Item>
-        <Styled.Item placement="left" title="Delete board" danger>
-          <DeleteOutlined
+        <Tooltip placement="left" title="Edit board">
+          <Styled.Icon
+            icon={faPenToSquare}
+            onClick={() => dispatch(toggleEditBoard(boardId))}
+          />
+        </Tooltip>
+        <Tooltip placement="left" title="Delete board" $danger>
+          <Styled.Icon
+            icon={faTrashCan}
+            $danger
             onClick={() =>
               confirm(boardName, async () =>
                 dispatch(deleteBoard(boardId, () => navigate("/boards")))
               )
             }
           />
-        </Styled.Item>
+        </Tooltip>
       </Styled.Panel>
     </Styled.Container>
   );

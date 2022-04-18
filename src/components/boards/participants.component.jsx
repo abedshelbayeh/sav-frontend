@@ -5,8 +5,10 @@ import { useSelector } from "react-redux";
 import Avatar from "../common/avatar.component";
 
 // styles
-import { Mentions, Empty, Badge, Spin, Button } from "antd";
-import { ArrowLeftOutlined, DeleteOutlined } from "@ant-design/icons";
+import { Select, Empty, Spin, Button } from "antd";
+import { FontAwesomeIcon as Icon } from "@fortawesome/react-fontawesome";
+import { faCircleLeft } from "@fortawesome/free-solid-svg-icons";
+import { faTrashCan } from "@fortawesome/free-regular-svg-icons";
 import * as Styled from "./participants.styles";
 
 const Participants = ({
@@ -31,37 +33,39 @@ const Participants = ({
   return (
     <div>
       <Styled.Breadcrumbs onClick={onBack}>
-        <ArrowLeftOutlined />
+        <Icon icon={faCircleLeft} />
         <Styled.Title level={4}>Templates</Styled.Title>
       </Styled.Breadcrumbs>
       <Styled.People>
-        <Mentions
+        <Styled.Search
           onChange={setMention}
-          onSelect={({ value }) => {
+          onSelect={(value) => {
             setParticipants({ ...selectedParticipants, [value]: true });
             setMention(null);
           }}
+          showSearch
           autoFocus
           value={mention}
-          placeholder="@John Smith"
+          placeholder="John Smith"
           filterOption={(input, { children }) =>
             children
               .replace(" ", "")
               .toLowerCase()
               .includes(input.replace(" ", "").toLowerCase())
           }
+          size="large"
         >
           {Object.values(people)
             .filter(({ id }) => !selectedParticipants[id])
             .map(({ id, name }) => (
-              <Mentions.Option key={id} value={id}>
+              <Select.Option key={id} value={id}>
                 {name}
-              </Mentions.Option>
+              </Select.Option>
             ))}
-        </Mentions>
+        </Styled.Search>
         <Styled.Header>
           <h2>Participants</h2>
-          <Badge
+          <Styled.Count
             count={Object.keys(selectedParticipants).length}
             overflowCount={Infinity}
           />
@@ -82,7 +86,7 @@ const Participants = ({
                   <Button
                     type="text"
                     danger
-                    icon={<DeleteOutlined />}
+                    icon={<Icon icon={faTrashCan} />}
                     onClick={() => {
                       const { [participant]: remove, ...rest } =
                         selectedParticipants;
@@ -95,7 +99,7 @@ const Participants = ({
           ) : (
             <Empty
               image={Empty.PRESENTED_IMAGE_SIMPLE}
-              description="To add participants, @ them in the mention box above."
+              description="To add participants, select them from the dropdown above."
             />
           )}
         </Styled.Participants>

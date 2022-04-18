@@ -114,9 +114,9 @@ const EditBoard = () => {
   return (
     <Modal
       visible={visible}
-      width="95%"
+      width="97%"
       style={{ padding: 0 }}
-      bodyStyle={{ height: "92vh", overflow: "scroll" }}
+      bodyStyle={{ height: "94vh", overflow: "scroll", paddingTop: "0" }}
       onCancel={() => dispatch(toggleEditBoard(boardId))}
       footer={null}
       centered
