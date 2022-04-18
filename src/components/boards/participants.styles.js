@@ -1,5 +1,5 @@
-import { Typography } from "antd";
 import styled from "styled-components";
+import { Badge, Select, Typography } from "antd";
 
 export const Loading = styled.div`
   position: absolute;
@@ -12,12 +12,13 @@ export const Breadcrumbs = styled.div`
   display: flex;
   align-items: center;
   gap: 8px;
-  color: ${({ theme }) => theme.COLOR_PRIMARY_TEXT};
+  margin: 25px 0 0 0;
+  color: ${({ theme }) => theme.TEXT_PRIMARY};
   cursor: pointer;
 `;
 
 export const Title = styled(Typography.Title)`
-  color: ${({ theme }) => theme.COLOR_PRIMARY_TEXT} !important;
+  color: ${({ theme }) => theme.TEXT_PRIMARY};
   margin: 0 !important;
 `;
 
@@ -51,19 +52,30 @@ export const Participant = styled.div`
   align-items: center;
   justify-content: space-between;
   padding: 5px 10px;
-  background-color: ${({ theme }) => theme.BACKGROUND_50};
-  border-radius: 5px;
+  background-color: ${({ theme }) => theme.BG_CARD};
+  border-radius: 2px;
 `;
 
 export const User = styled.div`
   display: flex;
   align-items: center;
   gap: 15px;
-  color: ${({ theme }) => theme.COLOR_PRIMARY_TEXT};
+  color: ${({ theme }) => theme.TEXT_PRIMARY};
 `;
 
 export const Subtitle = styled.div`
   font-size: 10pt;
-  color: ${({ theme }) => theme.COLOR_SECONDARY_TEXT};
+  color: ${({ theme }) => theme.TEXT_SECONDARY};
   margin-top: -5px;
+`;
+
+export const Count = styled(Badge)`
+  & .ant-badge-count {
+    background-color: ${({ theme }) => theme.primaryColor};
+    box-shadow: none !important;
+  }
+`;
+
+export const Search = styled(Select)`
+  width: 100%;
 `;

@@ -3,20 +3,20 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { signOut } from "../../interfaces/firebase";
 
-// components
-import EditBoard from "../boards/edit-board.component";
-import { ReactComponent as Sun } from "../../assets/sun.svg";
-import { ReactComponent as Moon } from "../../assets/moon.svg";
-
 // styles
+import { Button, Dropdown, Menu } from "antd";
+import { FontAwesomeIcon as Icon } from "@fortawesome/react-fontawesome";
 import {
-  SettingFilled,
-  UserOutlined,
-  PlusOutlined,
-  LogoutOutlined,
-  CaretDownOutlined,
-} from "@ant-design/icons";
-import { Avatar, Button, Dropdown, Menu } from "antd";
+  faChalkboard,
+  faBriefcase,
+  faChartSimple,
+  faUsers,
+  faCircleHalfStroke,
+  faPlus,
+  faUser,
+  faBell,
+  faRightFromBracket,
+} from "@fortawesome/free-solid-svg-icons";
 import * as Styled from "./navigation.styles";
 
 // actions
@@ -27,22 +27,26 @@ const primaryActions = [
   {
     id: "boards",
     title: "Boards",
+    icon: <Icon icon={faChalkboard} />,
   },
   {
     id: "your-work",
     title: "Your Work",
+    icon: <Icon icon={faBriefcase} />,
   },
   {
     id: "dashboards",
     title: "Dashboards",
+    icon: <Icon icon={faChartSimple} />,
   },
   {
     id: "people",
     title: "People",
+    icon: <Icon icon={faUsers} />,
   },
 ];
 
-const Navigation = ({ setLayloutClass }) => {
+const Navigation = ({ setLayoutClass }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -63,88 +67,65 @@ const Navigation = ({ setLayloutClass }) => {
     navigate(`${id}`);
   };
 
-  let actions = primaryActions.map(({ id, title }) => (
+  const actions = primaryActions.map(({ id, icon }) => (
     <Styled.Item
       key={id}
       onClick={() => handleNavigate(id)}
       selected={id === selectedAction}
     >
-      {title}
+      <Styled.Icon>{icon}</Styled.Icon>
     </Styled.Item>
   ));
 
-  let menu = primaryActions.map(({ id, title }) => (
-    <Menu.Item
-      key={id}
-      onClick={() => handleNavigate(id)}
-      selected={id === selectedAction}
-    >
-      {title}
-    </Menu.Item>
-  ));
-
-  const { innerWidth } = window;
   return (
     <Styled.Container>
-      <EditBoard />
       <Styled.Section>
         <Styled.Item>
           <Styled.Logo />
         </Styled.Item>
-        {innerWidth >= 850 && actions}
-        {innerWidth < 850 && (
-          <Dropdown overlay={<Menu>{menu}</Menu>}>
-            <Styled.Item>
-              More
-              <CaretDownOutlined />
-            </Styled.Item>
-          </Dropdown>
-        )}
-        <Styled.Item button>
+        {actions}
+        <Styled.Item>
           <Button
             type="primary"
+            shape="circle"
             onClick={() => dispatch(toggleEditBoard())}
-            icon={innerWidth < 850 && <PlusOutlined />}
-          >
-            {innerWidth >= 850 && "Create"}
-          </Button>
+            icon={<Icon icon={faPlus} />}
+          ></Button>
         </Styled.Item>
       </Styled.Section>
       <Styled.Section>
-        <Styled.SecondaryItem toggle>
-          <Styled.Toggle
-            defaultChecked={theme === "dark"}
-            checkedChildren={<Moon />}
-            unCheckedChildren={<Sun />}
-            onChange={() => {
-              setLayloutClass("disable-transition");
-              dispatch(setTheme(theme === "light" ? "dark" : "light"));
-              setTimeout(() => {
-                setLayloutClass();
-              }, 10);
-            }}
-          />
-        </Styled.SecondaryItem>
-        <Styled.SecondaryItem>
-          <SettingFilled />
-        </Styled.SecondaryItem>
-        <Dropdown
-          overlay={
-            <Menu>
-              <Menu.Item
-                key="sign-out"
-                onClick={() => handleNavigate(() => signOut())}
-                icon={<LogoutOutlined />}
-              >
-                Signout
-              </Menu.Item>
-            </Menu>
-          }
+        <Styled.Item>
+          <Icon icon={faBell} />
+        </Styled.Item>
+        <Styled.Item>
+          <Dropdown
+            placement="right"
+            overlay={
+              <Menu>
+                <Menu.Item
+                  key="sign-out"
+                  onClick={() => signOut()}
+                  icon={<Icon icon={faRightFromBracket} />}
+                >
+                  Sign out
+                </Menu.Item>
+              </Menu>
+            }
+          >
+            <Styled.Avatar icon={<Icon icon={faUser} />} />
+          </Dropdown>
+        </Styled.Item>
+        <Styled.Item
+          onClick={() => {
+            setLayoutClass("disable-transition");
+            dispatch(setTheme(theme === "light" ? "dark" : "light"));
+            setTimeout(() => {
+              setLayoutClass();
+            }, 100);
+          }}
         >
-          <Styled.SecondaryItem>
-            <Avatar icon={<UserOutlined />} />
-          </Styled.SecondaryItem>
-        </Dropdown>
+          <Icon icon={faCircleHalfStroke} />
+        </Styled.Item>
       </Styled.Section>
     </Styled.Container>
   );

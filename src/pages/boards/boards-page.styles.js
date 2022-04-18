@@ -1,25 +1,19 @@
 import styled from "styled-components";
-import { Input } from "antd";
 
 export const Container = styled.div`
-  width: 60%;
+  width: 70%;
 
   @media screen and (max-width: 850px) {
     width: 95%;
   }
 `;
 
-export const Header = styled.div`
+export const Title = styled.div`
   display: flex;
-  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
   margin: 0 0 20px 0;
-  gap: 5px;
-`;
-
-export const Search = styled(Input.Search)`
-  width: 60%;
-
-  @media screen and (max-width: 850px) {
-    width: 95%;
-  }
+  font-size: 16pt;
+  font-weight: 600;
+  color: ${({ theme }) => theme.TEXT_PRIMARY};
 `;

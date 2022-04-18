@@ -5,10 +5,10 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   height: 100%;
-  margin: 0 20px 0 0;
-  background-color: ${({ theme }) => theme.FLOAT_BACKGROUND};
-  box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 2px 0px;
-  border-radius: 5px;
+  margin: 0 15px 0 0;
+  background-color: ${({ theme }) => theme.BG_FLOAT};
+  box-shadow: rgba(0, 0, 0, 0.25) 0 1px 2px 0;
+  border-radius: 2px;
   pointer-events: all;
   overflow: hidden;
 `;
@@ -20,7 +20,8 @@ export const Overlay = styled.div`
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: ${({ theme }) => theme.TIMER_PROGRESS_BACKGROUND};
+  background-color: ${({ theme }) => theme.primaryColor};
+  opacity: 0.25;
   pointer-events: none;
   transition: transform 0.25s;
 `;
@@ -36,8 +37,8 @@ export const Time = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 26pt;
-  color: ${({ theme }) => theme.FLOAT_COLOR};
+  font-size: 25pt;
+  color: ${({ theme }) => theme.TEXT_PRIMARY};
 
   & span {
     margin-top: -7px;
@@ -58,25 +59,29 @@ export const Component = styled.input`
   border: none;
   outline: none;
   background: transparent;
-  width: 55px;
+  width: 45px;
   padding: 0;
   text-align: center;
-  color: ${({ theme }) => theme.FLOAT_COLOR};
+  color: ${({ theme }) => theme.TEXT_PRIMARY};
 `;
 
 export const Actions = styled.div`
   margin: 0 15px 0 0;
+
+  & .fa-play {
+    margin: 4px 0 0 2px !important;
+  }
 `;
 
 export const Add = styled.div`
   display: flex;
-  margin: 0 6px 6px 6px;
-  gap: 15px;
+  margin: 0 3px 3px 3px;
+  gap: 10px;
   z-index: 1;
 
   & .ant-btn {
     all: unset;
-    color: ${({ theme }) => theme.FLOAT_COLOR};
+    color: ${({ theme }) => theme.TEXT_PRIMARY};
     padding: 0 9px;
     cursor: pointer;
   }

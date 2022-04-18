@@ -15,9 +15,13 @@ export const NotFound = styled.div`
 `;
 
 export const Container = styled.div`
-  width: 95%;
+  width: 100%;
   display: flex;
   flex-direction: column;
+
+  @media screen and (max-width: 850px) {
+    width: 95%;
+  }
 `;
 
 export const Header = styled.div`
@@ -34,7 +38,11 @@ export const Back = styled.div`
 
 export const Title = styled.div`
   width: 80%;
-  color: ${({ theme }) => theme.COLOR_PRIMARY_TEXT};
+  color: ${({ theme }) => theme.TEXT_PRIMARY};
+
+  & .ant-typography-edit {
+    margin: 0 0 0 10px;
+  }
 
   & .ant-typography-edit-content {
     margin: -4px 0 11.5px 1px;
@@ -45,7 +53,7 @@ export const Title = styled.div`
     box-shadow: none;
     height: unset;
     background: transparent !important;
-    color: ${({ theme }) => theme.COLOR_PRIMARY_TEXT};
+    color: ${({ theme }) => theme.TEXT_PRIMARY};
     overflow: hidden;
   }
 `;

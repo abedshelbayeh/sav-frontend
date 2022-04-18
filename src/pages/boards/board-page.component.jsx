@@ -9,7 +9,8 @@ import notify from "../../utils/notification.util";
 
 // styles
 import { Typography, Button, Result, Spin } from "antd";
-import { EditOutlined, ArrowLeftOutlined } from "@ant-design/icons";
+import { FontAwesomeIcon as Icon } from "@fortawesome/react-fontawesome";
+import { faPenToSquare, faCircleLeft } from "@fortawesome/free-solid-svg-icons";
 import * as Styled from "./board-page.styles";
 
 // actions
@@ -76,7 +77,7 @@ const BoardPage = () => {
       <Styled.NotFound>
         <Result
           status="404"
-          title="Uh-Oh"
+          title="Uh-oh"
           subTitle="We can't find the board you're looking for! It might have been deleted."
           extra={
             <Button type="primary" onClick={() => navigate("/")}>
@@ -93,14 +94,14 @@ const BoardPage = () => {
       <Styled.Header>
         <Styled.Title>
           <Styled.Back onClick={() => navigate("/boards")}>
-            <ArrowLeftOutlined />
+            <Icon icon={faCircleLeft} />
             <span>Boards</span>
           </Styled.Back>
           <Typography.Title
             level={2}
             editable={{
               onChange: onTitleChange,
-              icon: <EditOutlined />,
+              icon: <Icon icon={faPenToSquare} />,
               enterIcon: null,
               maxLength: 50,
               autoFocus: true,

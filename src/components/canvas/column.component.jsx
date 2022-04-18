@@ -7,8 +7,12 @@ import deepEqual from "fast-deep-equal";
 import Card from "./card.component";
 
 // styles
+import { FontAwesomeIcon as Icon } from "@fortawesome/react-fontawesome";
+import {
+  faCirclePlus,
+  faGripLinesVertical,
+} from "@fortawesome/free-solid-svg-icons";
 import * as Styled from "./canvas.styles";
-import { HolderOutlined, PlusCircleFilled } from "@ant-design/icons";
 
 // actions
 import { addCard } from "../../redux/canvas/canvas.actions";
@@ -35,10 +39,11 @@ const Column = ({ title, index }) => {
         >
           <Styled.Header {...provided.dragHandleProps} isDragging={isDragging}>
             <Styled.Title>
-              <HolderOutlined />
+              <Icon icon={faGripLinesVertical} />
               {title.toUpperCase()}
             </Styled.Title>
-            <PlusCircleFilled
+            <Styled.AddCard
+              icon={faCirclePlus}
               onClick={!paused ? () => dispatch(addCard(title)) : null}
             />
           </Styled.Header>
@@ -55,8 +60,8 @@ const Column = ({ title, index }) => {
                   ))}
                 {cardIds.length <= 0 && (
                   <Styled.Empty>
-                    Click the <PlusCircleFilled /> icon on the top right corner
-                    to add a new card.
+                    Click the <Icon icon={faCirclePlus} /> icon on the top right
+                    corner to add a new card.
                   </Styled.Empty>
                 )}
                 {provided.placeholder}

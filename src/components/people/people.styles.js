@@ -1,13 +1,18 @@
 import styled from "styled-components";
-import { Button } from "antd";
+import { Button, Input } from "antd";
 
 export const Header = styled.div`
   display: flex;
   align-items: center;
-  margin: 0 0 10px 0;
+  justify-content: space-between;
+  gap: 5px;
+`;
 
-  & h2 {
-    margin: 0 10px 0 0;
+export const Search = styled(Input.Search)`
+  width: 60%;
+
+  @media screen and (max-width: 850px) {
+    width: 95%;
   }
 `;
 
@@ -19,17 +24,17 @@ export const User = styled.div`
 
 export const Subtitle = styled.div`
   font-size: 10pt;
-  color: ${({ theme }) => theme.COLOR_SECONDARY_TEXT};
+  color: ${({ theme }) => theme.TEXT_SECONDARY};
   margin-top: -5px;
 `;
 
 export const InviteAnotherButton = styled(Button)`
   width: 100%;
-  background-color: ${({ theme }) => theme.BACKGROUND_200} !important;
-  color: ${({ theme }) => theme.COLOR_PRIMARY_TEXT};
-  border: ${({ theme }) => `1px dashed ${theme.COLOR_SECONDARY_TEXT}`};
+  background: transparent !important;
+  color: ${({ theme }) => theme.TEXT_PRIMARY};
+  border: ${({ theme }) => `1px dashed ${theme.BG400}`} !important;
 
-  :hover {
-    background-color: ${({ theme }) => theme.BACKGROUND_100} !important;
+  & span {
+    margin: 0 10px;
   }
 `;

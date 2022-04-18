@@ -4,11 +4,9 @@ import { getTimeParts, getProgress, buildTime } from "./timer.utils";
 
 // styles
 import { Button } from "antd";
-import {
-  CaretRightFilled,
-  PauseOutlined,
-  PlusCircleOutlined,
-} from "@ant-design/icons";
+import { PlusCircleOutlined } from "@ant-design/icons";
+import { FontAwesomeIcon as Icon } from "@fortawesome/react-fontawesome";
+import { faPause, faPlay } from "@fortawesome/free-solid-svg-icons";
 import * as Styled from "./timer.styles";
 
 // actions
@@ -95,7 +93,7 @@ const Timer = () => {
           <Button
             type="primary"
             shape="circle"
-            icon={running ? <PauseOutlined /> : <CaretRightFilled />}
+            icon={running ? <Icon icon={faPause} /> : <Icon icon={faPlay} />}
             onClick={() => {
               running ? dispatch(pauseTimer(timer)) : dispatch(startTimer());
             }}

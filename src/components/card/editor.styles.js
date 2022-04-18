@@ -9,5 +9,5 @@ export const Textarea = styled.div`
   font-weight: 500;
   padding: 0 30px 0 0;
   cursor: text;
-  color: ${({ theme }) => theme.COLOR_PRIMARY_TEXT};
+  color: ${({ theme }) => theme.TEXT_PRIMARY};
 `;

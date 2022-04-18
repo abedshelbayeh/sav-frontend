@@ -1,12 +1,12 @@
-import { CheckCircleFilled } from "@ant-design/icons";
-import { Typography } from "antd";
 import styled from "styled-components";
+import { Typography } from "antd";
+import { FontAwesomeIcon as Icon } from "@fortawesome/react-fontawesome";
 
 export const Card = styled.div`
   position: relative;
   height: 240px;
   width: 240px;
-  background-color: ${({ theme }) => theme.BACKGROUND_50};
+  background-color: ${({ theme }) => theme.BG_CARD};
   border: ${({ selected, theme }) =>
     selected ? `1px solid ${theme.COLOR_POSITIVE}` : `none`};
   border-radius: 15px;
@@ -46,8 +46,8 @@ export const Overlay = styled.div`
   left: 0;
   padding: 15px;
   opacity: 0;
-  background-color: ${({ theme }) => theme.BACKGROUND_50};
-  color: ${({ theme }) => theme.COLOR_PRIMARY_TEXT};
+  background-color: ${({ theme }) => theme.BG_CARD};
+  color: ${({ theme }) => theme.TEXT_PRIMARY};
   border-radius: 15px;
   transition: opacity 0.45s ease;
   display: flex;
@@ -76,12 +76,12 @@ export const Actions = styled.div`
   align-self: flex-end;
 `;
 
-export const SelectedIcon = styled(CheckCircleFilled)`
+export const SelectedIcon = styled(Icon)`
   font-size: 25px;
   color: ${({ theme }) => theme.COLOR_POSITIVE};
 `;
 
 export const Title = styled(Typography.Title)`
   margin: 5px;
-  color: ${({ theme }) => theme.COLOR_PRIMARY_TEXT} !important;
+  color: ${({ theme }) => theme.TEXT_PRIMARY} !important;
 `;

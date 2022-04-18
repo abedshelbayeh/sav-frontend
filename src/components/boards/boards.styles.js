@@ -1,18 +1,20 @@
 import styled from "styled-components";
-
-import { Badge } from "antd";
+import { Input } from "antd";
 
 export const Header = styled.div`
   display: flex;
   align-items: center;
-  margin: 0 0 10px 0;
-
-  & h2 {
-    margin: 0 10px 0 0;
-  }
+  justify-content: space-between;
+  gap: 5px;
 `;
 
-export const NumberOfParticipants = styled(Badge)``;
+export const Search = styled(Input.Search)`
+  width: 60%;
+
+  @media screen and (max-width: 850px) {
+    width: 95%;
+  }
+`;
 
 export const Actions = styled.div`
   display: flex;
