@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.0](https://github.com/project-savvy/sav-frontend/compare/v0.5.0...v0.6.0) (2022-04-18)
+
+
+### Features
+
+* Improved user experience ([09d9ee7](https://github.com/project-savvy/sav-frontend/commit/09d9ee7343d4cb41538d7ecf6b378b5c3190e2fb))
+
 ## [0.5.0](https://github.com/project-savvy/sav-frontend/compare/v0.4.0...v0.5.0) (2022-04-15)
 
 
