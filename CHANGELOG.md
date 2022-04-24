@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.7.0](https://github.com/project-savvy/sav-frontend/compare/v0.6.0...v0.7.0) (2022-04-24)
+
+
+### Features
+
+* [#21](https://github.com/project-savvy/sav-frontend/issues/21), [#22](https://github.com/project-savvy/sav-frontend/issues/22) Automatic dark mode, and impersonation ([6684173](https://github.com/project-savvy/sav-frontend/commit/6684173d467a83e31f4d14fa85429789210b2a0b))
+
 ## [0.6.0](https://github.com/project-savvy/sav-frontend/compare/v0.5.0...v0.6.0) (2022-04-18)
 
 
