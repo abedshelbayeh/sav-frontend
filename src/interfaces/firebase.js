@@ -1,6 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getDatabase } from "firebase/database";
-import { getAuth } from "firebase/auth";
+import { signInWithCustomToken, getAuth } from "firebase/auth";
+import service from "./service";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDPojMqMiYFgCVIZzJDg3eXNtQihpnFU-I",
@@ -22,4 +23,12 @@ export const auth = getAuth();
 
 export const signOut = () => {
   return auth.signOut();
+};
+
+export const endImpersonation = async () => {
+  const { data: { token } = {} } = await service(
+    "post",
+    "/v1/authentication/impersonation/end"
+  );
+  await signInWithCustomToken(auth, token);
 };

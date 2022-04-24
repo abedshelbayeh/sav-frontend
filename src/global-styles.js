@@ -2,6 +2,7 @@ import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
   body {
+    font-family: sans-serif;
     background: ${({ theme }) => theme.BG200};
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -19,7 +20,7 @@ const GlobalStyle = createGlobalStyle`
 
   .ant-dropdown-menu {
     background-color: ${({ theme }) => theme.BG_FLOAT};
-    border-radius: 2px;
+    border-radius: 5px;
   }
 
   .ant-dropdown-menu-item {
@@ -146,7 +147,7 @@ const GlobalStyle = createGlobalStyle`
 
   .ant-select-dropdown {
     background-color: ${({ theme }) => theme.BG_FLOAT};
-    border-radius: 2px;
+    border-radius: 5px;
     overflow: hidden;
   }
 
@@ -161,7 +162,7 @@ const GlobalStyle = createGlobalStyle`
 
   .ant-modal-content {
     background-color: ${({ theme }) => theme.BG100} !important;
-    border-radius: 2px;
+    border-radius: 5px;
     overflow: hidden;
   }
 
@@ -192,7 +193,7 @@ const GlobalStyle = createGlobalStyle`
 
   .ant-mentions-dropdown-menu {
     background-color: ${({ theme }) => theme.BG_FLOAT};
-    border-radius: 2px;
+    border-radius: 5px;
   }
 
   .ant-mentions-dropdown-menu-item {
@@ -287,7 +288,7 @@ const GlobalStyle = createGlobalStyle`
 
   .ant-notification-notice {
     background-color: ${({ theme }) => theme.BG_NOTIFICATION} !important;
-    border-radius: 2px;
+    border-radius: 5px;
     color: ${({ theme }) => theme.TEXT_PRIMARY};
   }
 

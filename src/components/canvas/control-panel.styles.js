@@ -57,7 +57,7 @@ export const Panel = styled.div`
   padding: 10px 10px 20px 10px;
   background-color: ${({ theme }) => theme.BG_FLOAT};
   box-shadow: rgba(0, 0, 0, 0.25) 0 1px 2px 0;
-  border-radius: 2px;
+  border-radius: 5px;
   color: ${({ theme }) => theme.TEXT_PRIMARY};
   pointer-events: all;
   transition: transform 0.25s;

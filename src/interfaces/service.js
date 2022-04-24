@@ -1,5 +1,7 @@
 import axios from "axios";
 import retry from "axios-retry";
+import { getIdToken } from "firebase/auth";
+import { auth } from "./firebase";
 
 retry(axios, { retries: 3 });
 
@@ -16,10 +18,14 @@ switch (NODE_ENV) {
 }
 
 const service = async (method, endpoint, data) => {
+  const token = await getIdToken(auth.currentUser);
   return axios({
     method: method,
     url: `${base}${endpoint}`,
     data,
+    headers: {
+      "X-SAV-User": token,
+    },
   });
 };
 

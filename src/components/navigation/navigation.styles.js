@@ -1,4 +1,3 @@
-import { Avatar as AntAvatar } from "antd";
 import styled, { css } from "styled-components";
 import { NAVIGATION_WIDTH } from "../layout/layout.styles";
 
@@ -65,8 +64,4 @@ export const Item = styled.div`
 export const Icon = styled.div`
   width: 25px;
   text-align: center;
-`;
-
-export const Avatar = styled(AntAvatar)`
-  background-color: ${({ theme }) => theme.BG400}; ;
 `;

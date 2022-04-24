@@ -1,62 +1,63 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { signOut } from "../../interfaces/firebase";
+
+// components
+import UserSettings from "./user-settings.component";
 
 // styles
-import { Button, Dropdown, Menu } from "antd";
+import { Button } from "antd";
 import { FontAwesomeIcon as Icon } from "@fortawesome/react-fontawesome";
 import {
   faChalkboard,
   faBriefcase,
   faChartSimple,
   faUsers,
-  faCircleHalfStroke,
   faPlus,
-  faUser,
   faBell,
-  faRightFromBracket,
 } from "@fortawesome/free-solid-svg-icons";
 import * as Styled from "./navigation.styles";
 
 // actions
 import { toggleEditBoard } from "../../redux/boards/boards.actions";
-import { setTheme } from "../../redux/user/user.actions";
-
-const primaryActions = [
-  {
-    id: "boards",
-    title: "Boards",
-    icon: <Icon icon={faChalkboard} />,
-  },
-  {
-    id: "your-work",
-    title: "Your Work",
-    icon: <Icon icon={faBriefcase} />,
-  },
-  {
-    id: "dashboards",
-    title: "Dashboards",
-    icon: <Icon icon={faChartSimple} />,
-  },
-  {
-    id: "people",
-    title: "People",
-    icon: <Icon icon={faUsers} />,
-  },
-];
 
 const Navigation = ({ setLayoutClass }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { pathname } = useLocation();
+  const roles = useSelector(({ user: { user: { roles = [] } = {} } }) => roles);
+
+  const primaryActions = [
+    {
+      id: "boards",
+      title: "Boards",
+      icon: <Icon icon={faChalkboard} />,
+    },
+    {
+      id: "your-work",
+      title: "Your Work",
+      icon: <Icon icon={faBriefcase} />,
+    },
+  ];
+  if (roles.includes("ADMIN")) {
+    primaryActions.push(
+      {
+        id: "dashboards",
+        title: "Dashboards",
+        icon: <Icon icon={faChartSimple} />,
+      },
+      {
+        id: "people",
+        title: "People",
+        icon: <Icon icon={faUsers} />,
+      }
+    );
+  }
 
   const [{ id: defaultAction } = {}] = primaryActions;
   const [selectedAction, selectAction] = useState(defaultAction);
 
-  const theme = useSelector(({ user: { theme } }) => theme);
-
+  const { pathname } = useLocation();
   useEffect(() => {
     const [pathAction] = pathname.match("[^/]+") || [];
     selectAction(pathAction || defaultAction);
@@ -98,33 +99,7 @@ const Navigation = ({ setLayoutClass }) => {
           <Icon icon={faBell} />
         </Styled.Item>
         <Styled.Item>
-          <Dropdown
-            placement="right"
-            overlay={
-              <Menu>
-                <Menu.Item
-                  key="sign-out"
-                  onClick={() => signOut()}
-                  icon={<Icon icon={faRightFromBracket} />}
-                >
-                  Sign out
-                </Menu.Item>
-              </Menu>
-            }
-          >
-            <Styled.Avatar icon={<Icon icon={faUser} />} />
-          </Dropdown>
-        </Styled.Item>
-        <Styled.Item
-          onClick={() => {
-            setLayoutClass("disable-transition");
-            dispatch(setTheme(theme === "light" ? "dark" : "light"));
-            setTimeout(() => {
-              setLayoutClass();
-            }, 100);
-          }}
-        >
-          <Icon icon={faCircleHalfStroke} />
+          <UserSettings setLayoutClass={setLayoutClass} />
         </Styled.Item>
       </Styled.Section>
     </Styled.Container>

@@ -5,7 +5,7 @@ export const authenticationStart = () => {
 };
 
 export const setUser = (user) => {
-  const theme = localStorage.getItem("sav-theme") || "light";
+  const theme = localStorage.getItem("sav-theme") || "system";
   return { type: UserActionTypes.SET_USER, payload: { user, theme } };
 };
 

@@ -27,6 +27,7 @@ const theme = {
   COLOR_CANVAS_SYNC: "#096dd9",
   COLOR_POSITIVE: "#00bfa6",
   COLOR_DANGER: "#ff4d4f",
+  BG_IMPERSONATION: "rgba(255,77,79,0.9)",
 
   // antd
   primaryColor: "#5A81FA",

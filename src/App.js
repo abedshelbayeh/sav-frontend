@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { auth } from "./interfaces/firebase";
 import { onAuthStateChanged } from "firebase/auth";
+import { useMediaQuery } from "react-responsive";
 
 // components
 import Layout from "./components/layout/layout.component";
@@ -39,7 +40,14 @@ const Construction = () => (
 function App() {
   const dispatch = useDispatch();
 
-  const { loading, user, theme } = useSelector(({ user }) => user);
+  let { loading, user, theme } = useSelector(({ user }) => user);
+
+  const systemPrefersDark = useMediaQuery({
+    query: "(prefers-color-scheme: dark)",
+  });
+  if (theme === "system") {
+    theme = systemPrefersDark ? "dark" : "light";
+  }
 
   ConfigProvider.config({
     theme: themes[theme],
@@ -47,9 +55,22 @@ function App() {
 
   useEffect(() => {
     dispatch(authenticationStart());
-    const subscription = onAuthStateChanged(auth, (user) =>
-      dispatch(setUser(user))
-    );
+    const subscription = onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        const {
+          claims: { _clientId, userId, name, roles = [], impersonator } = {},
+        } = await user.getIdTokenResult();
+        dispatch(
+          setUser(
+            roles.length
+              ? { ...user, _clientId, userId, name, roles, impersonator }
+              : null
+          )
+        );
+      } else {
+        dispatch(setUser(null));
+      }
+    });
     return () => {
       subscription();
     };
