@@ -1,5 +1,12 @@
 # Changelog
 
+### [0.7.1](https://github.com/project-savvy/sav-frontend/compare/v0.7.0...v0.7.1) (2022-04-30)
+
+
+### Bug Fixes
+
+* Change animation of the user settings portal to match the rest of the app. ([6b6fddd](https://github.com/project-savvy/sav-frontend/commit/6b6fddd4b82f88d077bfb3591c72bb3f1f4e1b0f))
+
 ## [0.7.0](https://github.com/project-savvy/sav-frontend/compare/v0.6.0...v0.7.0) (2022-04-24)
 
 
