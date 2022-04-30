@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import ReactDOM from "react-dom";
 import { signOut } from "../../interfaces/firebase";
 
 // styles
@@ -15,12 +14,6 @@ import * as Styled from "./user-settings.styles";
 
 // actions
 import { setTheme } from "../../redux/user/user.actions";
-
-const Portal = ({ children }) => {
-  return typeof document === "object"
-    ? ReactDOM.createPortal(children, document.body)
-    : null;
-};
 
 const themeOptions = [
   {
@@ -88,7 +81,7 @@ const UserSettings = ({ setLayoutClass }) => {
   }
 
   const actions = actionOptions.map(({ key, title, icon, onClick }) => (
-    <Styled.Option onClick={onClick}>
+    <Styled.Option key={key} onClick={onClick}>
       <Styled.Icon>
         <Icon icon={icon} />
       </Styled.Icon>
@@ -100,35 +93,34 @@ const UserSettings = ({ setLayoutClass }) => {
 
   return (
     <>
-      <Portal>
-        <Styled.Overlay
-          className={open && "open"}
-          onClick={() => setOpen(!open)}
-        />
-        <Styled.Modal className={open && "open"}>
-          <Styled.User>
-            <Styled.Avatar icon={<Icon icon={faUser} />} />
-            <Styled.Content>
-              <Styled.Title>{name}</Styled.Title>
-              <Styled.Email>{email}</Styled.Email>
-            </Styled.Content>
-          </Styled.User>
-          {actions}
-          <Styled.Header>
-            <Styled.Icon>
-              <Icon icon={faMoon} />
-            </Styled.Icon>
-            <Styled.Content>
-              <Styled.Title>Dark Mode</Styled.Title>
-              <Styled.Description>
-                Adjust the appearance of the app to reduce glare and give your
-                eyes a break.
-              </Styled.Description>
-            </Styled.Content>
-          </Styled.Header>
-          {themes}
-        </Styled.Modal>
-      </Portal>
+      <Styled.Modal
+        visible={open}
+        footer={null}
+        closable={false}
+        onCancel={() => setOpen(!open)}
+      >
+        <Styled.User>
+          <Styled.Avatar icon={<Icon icon={faUser} />} />
+          <Styled.Content>
+            <Styled.Title>{name}</Styled.Title>
+            <Styled.Email>{email}</Styled.Email>
+          </Styled.Content>
+        </Styled.User>
+        {actions}
+        <Styled.Header>
+          <Styled.Icon>
+            <Icon icon={faMoon} />
+          </Styled.Icon>
+          <Styled.Content>
+            <Styled.Title>Dark Mode</Styled.Title>
+            <Styled.Description>
+              Adjust the appearance of the app to reduce glare and give your
+              eyes a break.
+            </Styled.Description>
+          </Styled.Content>
+        </Styled.Header>
+        {themes}
+      </Styled.Modal>
       <Styled.Avatar
         icon={<Icon icon={faUser} />}
         onClick={() => setOpen(!open)}
