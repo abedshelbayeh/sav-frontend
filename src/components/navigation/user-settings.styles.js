@@ -1,41 +1,22 @@
-import { Avatar as AntAvatar } from "antd";
+import { Avatar as AntAvatar, Modal as AntModal } from "antd";
 import styled from "styled-components";
 import { NAVIGATION_WIDTH } from "../layout/layout.styles";
 
-export const Overlay = styled.div`
+export const Modal = styled(AntModal)`
   position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  pointer-events: none;
-  transition: background-color 0.25s;
-  z-index: 9;
-
-  &.open {
-    background-color: rgba(0, 0, 0, 0.5);
-    pointer-events: all;
-  }
-`;
-
-export const Modal = styled.div`
-  position: fixed;
-  bottom: -430px;
   left: ${NAVIGATION_WIDTH + 10}px;
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  width: 300px;
-  padding: 15px;
-  background-color: ${({ theme }) => theme.BG_FLOAT};
-  box-shadow: rgba(0, 0, 0, 0.25) 0 1px 2px 0;
-  border-radius: 5px;
-  color: ${({ theme }) => theme.TEXT_PRIMARY};
-  transition: transform 0.2s;
-  z-index: 10;
+  top: unset;
+  bottom: 10px;
+  width: 300px !important;
+  padding: 0;
 
-  &.open {
-    transform: translateY(-440px);
+  & .ant-modal-body {
+    background-color: ${({ theme }) => theme.BG_FLOAT};
+    padding: 15px !important;
+    display: flex;
+    flex-direction: column;
+    color: ${({ theme }) => theme.TEXT_PRIMARY};
+    gap: 5px;
   }
 `;
 
@@ -101,7 +82,7 @@ export const User = styled.div`
 `;
 
 export const Avatar = styled(AntAvatar)`
-  background-color: ${({ theme }) => theme.BG400}; ;
+  background-color: ${({ theme }) => theme.BG400};
 `;
 
 export const Header = styled.div`

@@ -2,8 +2,9 @@ import styled from "styled-components";
 
 export const Bar = styled.div`
   position: fixed;
-  bottom: 10px;
-  right: 10px;
+  bottom: 0;
+  right: 0;
+  margin: 10px;
   min-height: 40px;
   background-color: ${({ theme }) => theme.BG_IMPERSONATION};
   display: flex;
